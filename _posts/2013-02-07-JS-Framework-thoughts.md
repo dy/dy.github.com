@@ -1,3 +1,11 @@
+---
+layout: post
+title: JS Framework thoughts
+published: true
+category: blog
+tags: [programming, life]
+language: english
+---
 # JS Framework points
 Current state of framework (jquery ui) isn’t satisfying for app development needs: it’s too slow and intricate, requires labor.
 

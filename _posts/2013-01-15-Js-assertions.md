@@ -1,3 +1,11 @@
+---
+layout: post
+title: Vows assertions
+published: true
+category: blog
+tags: [programming, js]
+language: english
+---
 # Vows assert
 
 There’s some notes about js assert in vows, particularly.

@@ -1,3 +1,11 @@
+---
+layout: post
+title: What I believe in
+published: true
+category: blog
+tags: [life, faith]
+language: ru
+---
 Во что я верю?
 
 В безграничность человеческих способностей, в плане волевое управление телом. (в управляемость тела силой духа)

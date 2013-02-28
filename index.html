@@ -1,53 +1,10 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>About making UI</title>
+---
+layout: default
+---
 
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-
-
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Dmitry Ivanov</h1>
-        <p>About UI [page header]</p>
-        <nav class="left-nav nav">
-          <ul class="left-nav-list">
-            <li class="left-nav-list-item"><a href="https://github.com/dfcreative">Projects</a></li>
-            <li class="left-nav-list-item"><a href="https://github.com/dfcreative">Ideas</a></li>
-            <li class="left-nav-list-item"><a href="https://github.com/dfcreative">Notes</a></li>
-            <li class="left-nav-list-item"><a href="https://github.com/dfcreative">About</a></li>
-          </ul>
-        </nav>
-
-        <ul>
-          <li><a class="buttons github" href="https://github.com/dfcreative">GitHub Profile</a></li>
-        </ul>
-      </header>
-
-      <section>
-        <p>Actually it’s content of article about user interfaces</p>
-      </section>
-
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
-      </footer>
-
-    </div>=
-
-
-    <script src="js/scale.fix.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/site.js"></script>
-
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-  </body>
-</html>
+Text on main page
+<ul class="posts">
+  {% for post in site.posts %}
+    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>

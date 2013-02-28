@@ -1,3 +1,10 @@
+---
+layout: post
+title: Plan
+published: true
+category: plan
+tags: [programming, life]
+---
 # My global plans, possible activities
 
 Photoshopr plugin → money
