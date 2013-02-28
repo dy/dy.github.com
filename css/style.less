@@ -1,0 +1,222 @@
+@import "reset";
+@import "rhythm";
+
+/* Variables */
+@sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@serif: "", serif;
+
+@fs: 15pt;
+@lh: 20pt;
+
+@rhythmic-unit: @lh; /* For rhythmless */
+
+@text: #333;
+@inverseText: #f1f1f1;
+@link: #822;
+@hover: brighter(@link);
+@visited: #a44;
+
+@bg: #f7f7f7;
+@inverseBg: #333;
+
+/* Mixins */
+.fs(@fontSize: 1){
+  font-size: @fontSize * @fs;
+}
+.ff(@fontFamily: @sans){
+  font-family: @fontFamily;
+}
+.lh(@rows: 1){ /*number of rows, not actual lh*/
+  line-height: @rows * @lh
+}
+
+.bg(@color: @bg){
+  background: @color;
+}
+
+.grad(@gradient){
+  
+}
+.shad(@shadow){
+  
+}
+.vr(@rows: 1, @top: 0, @bottom: 0){/*Number of rown in vertical rhythm (fuck paddings & margins off)*/
+  .lh(@rows);
+  padding-top: @top * @lh;
+  padding-bottom: @bottom * @lh;
+}
+
+
+
+/* Base text styles */
+body {
+  .ff;
+  .fs;
+	.bg;
+  .lh;
+  -webkit-font-smoothing: antialiased;
+  #rhythmless > .vertical-grid(mix(@bg, @inverseBg, 95%));
+}
+
+h1, h2, h3, h4, h5, h6 {
+  .vr(2);
+  .fs(1.9);
+}
+
+p, ul, ol, table, dl {
+}
+
+h1,h2, h3 {
+  font-weight: normal;
+}
+
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+h4, h5, h6 {
+	font-weight: 700;
+}
+
+a {
+  color:#C30000;
+  font-weight:200;
+  text-decoration:none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+small {
+}
+
+em {
+}
+
+strong {
+  font-weight:700;
+}
+
+ul li {
+  list-style: inside;
+}
+
+ol li {
+  list-style: decimal inside;
+}
+
+blockquote {
+  margin: 0;
+  font-style: italic;
+}
+
+dl, dt, dd, dl p {
+	font-color: #444;
+}
+
+dl dt {
+  font-weight: bold;
+}
+
+dl dd {
+  font-style: italic;
+}
+
+dl p {
+  font-style: italic;
+}
+
+hr {
+  border:0;
+  background:#ccc;
+  height:1px;
+}
+
+/* Images */
+
+img {
+  position: relative;
+  margin: 0 auto;
+  max-width: 650px;
+  border: 1px solid #ccc;
+}
+
+
+/* Code blocks */
+code, pre {
+	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  color:#000;
+}
+
+pre {
+  background: #FDFEFB;
+  border-radius:4px;
+  border:1px solid #D7D8C8;
+  overflow: auto;
+  overflow-y: hidden;
+}
+
+
+/* Tables */
+
+table {
+  width:100%;
+}
+
+table {
+  border: 1px solid #ccc;
+  text-align: left;
+ }
+
+th {
+	font-weight: normal;
+  background: #232323;
+  color: #FDFEFB;
+ }
+
+td {
+}
+
+
+/* Wrapper */
+.wrapper {
+  width:960px;
+}
+
+
+/* Header */
+
+header {
+
+}
+
+header ul {
+  list-style:none;
+}
+
+header li {
+	list-style-type: none;
+}
+
+header li:hover {
+}
+
+
+/* Section - for main page content */
+
+section {
+  width:650px;
+}
+
+
+/* Footer */
+
+footer {
+  position:fixed;
+}

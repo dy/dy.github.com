@@ -1,0 +1,222 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* Variables */
+/* For rhythmless */
+/* Mixins */
+/* Base text styles */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15pt;
+  background: #f7f7f7;
+  /*number of rows, not actual lh*/
+
+  line-height: 20pt;
+  -webkit-font-smoothing: antialiased;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), color-stop(95%, #ffffff), color-stop(95%, #ededed), to(#ededed));
+  background: -moz-linear-gradient(top, #ffffff, #ffffff 95%, #ededed 95%, #ededed);
+  background-size: auto 20pt;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /*Number of rown in vertical rhythm (fuck paddings & margins off)*/
+
+  /*number of rows, not actual lh*/
+
+  line-height: 40pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+  font-size: 28.5pt;
+}
+h1,
+h2,
+h3 {
+  font-weight: normal;
+}
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+a {
+  color: #C30000;
+  font-weight: 200;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+strong {
+  font-weight: 700;
+}
+ul li {
+  list-style: inside;
+}
+ol li {
+  list-style: decimal inside;
+}
+blockquote {
+  margin: 0;
+  font-style: italic;
+}
+dl,
+dt,
+dd,
+dl p {
+  font-color: #444;
+}
+dl dt {
+  font-weight: bold;
+}
+dl dd {
+  font-style: italic;
+}
+dl p {
+  font-style: italic;
+}
+hr {
+  border: 0;
+  background: #ccc;
+  height: 1px;
+}
+/* Images */
+img {
+  position: relative;
+  margin: 0 auto;
+  max-width: 650px;
+  border: 1px solid #ccc;
+}
+/* Code blocks */
+code,
+pre {
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  color: #000;
+}
+pre {
+  background: #FDFEFB;
+  border-radius: 4px;
+  border: 1px solid #D7D8C8;
+  overflow: auto;
+  overflow-y: hidden;
+}
+/* Tables */
+table {
+  width: 100%;
+}
+table {
+  border: 1px solid #ccc;
+  text-align: left;
+}
+th {
+  font-weight: normal;
+  background: #232323;
+  color: #FDFEFB;
+}
+/* Wrapper */
+.wrapper {
+  width: 960px;
+}
+/* Header */
+header ul {
+  list-style: none;
+}
+header li {
+  list-style-type: none;
+}
+/* Section - for main page content */
+section {
+  width: 650px;
+}
+/* Footer */
+footer {
+  position: fixed;
+}
