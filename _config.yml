@@ -1,4 +1,4 @@
+markdown: kramdown
 permalink: /:categories/:title
 server: true
-baseurl:    /my_site
 url: http://localhost:4000

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Prophet’s problem
+title: Prophetâ€™s problem
 published: true
 category: blog
 tags: [programming, life]
 language: english
 ---
-When you can predict too much, interest of your life’s moment looses. It’s like when you can predict TV show events. It becomes booring. That’s actually interest of TV show. And my main goal with english – get enough qualified to understand any new feed.
+When you can predict too much, interest of your lifeâ€™s moment looses. Itâ€™s like when you can predict TV show events. It becomes booring. Thatâ€™s actually interest of TV show. And my main goal with english â€“ get enough qualified to understand any new feed.
