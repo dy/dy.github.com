@@ -1,52 +1,5 @@
 @import "reset";
-@import "rhythm";
-
-/* Variables */
-@sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-@serif: "", serif;
-
-@fs: 15pt;
-@lh: 20pt;
-
-@rhythmic-unit: @lh; /* For rhythmless */
-
-@text: #333;
-@inverseText: #f1f1f1;
-@link: #822;
-@hover: brighter(@link);
-@visited: #a44;
-
-@bg: #f7f7f7;
-@inverseBg: #333;
-
-/* Mixins */
-.fs(@fontSize: 1){
-  font-size: @fontSize * @fs;
-}
-.ff(@fontFamily: @sans){
-  font-family: @fontFamily;
-}
-.lh(@rows: 1){ /*number of rows, not actual lh*/
-  line-height: @rows * @lh
-}
-
-.bg(@color: @bg){
-  background: @color;
-}
-
-.grad(@gradient){
-  
-}
-.shad(@shadow){
-  
-}
-.vr(@rows: 1, @top: 0, @bottom: 0){/*Number of rown in vertical rhythm (fuck paddings & margins off)*/
-  .lh(@rows);
-  padding-top: @top * @lh;
-  padding-bottom: @bottom * @lh;
-}
-
-
+@import "variables";
 
 /* Base text styles */
 body {
@@ -55,7 +8,7 @@ body {
 	.bg;
   .lh;
   -webkit-font-smoothing: antialiased;
-  #rhythmless > .vertical-grid(mix(@bg, @inverseBg, 95%));
+  .rhythm;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -84,12 +37,13 @@ h4, h5, h6 {
 }
 
 a {
-  color:#C30000;
+  color:@link;
   font-weight:200;
   text-decoration:none;
 }
 
 a:hover {
+  color:@hover;
 	text-decoration: underline;
 }
 
@@ -184,12 +138,6 @@ td {
 }
 
 
-/* Wrapper */
-.wrapper {
-  width:960px;
-}
-
-
 /* Header */
 
 header {
@@ -207,11 +155,16 @@ header li {
 header li:hover {
 }
 
+aside{
+  .col(2, 12);
+  position: fixed;
+}
+
 
 /* Section - for main page content */
 
 section {
-  width:650px;
+  .col(10, 12, 2)
 }
 
 

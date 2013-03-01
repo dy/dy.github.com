@@ -4,11 +4,11 @@
 <title>Dmitry Ivanov</title>
 
 <link rel="stylesheet" href="/css/style.css">
-<!--<link rel="stylesheet/less" type="text/css" href="css/style.less" />
-<script src="js/less.js" type="text/javascript"></script>-->
+<!--<link rel="stylesheet/less" type="text/css" href="/css/style.less" />
+<script src="/js/less.js" type="text/javascript"></script>-->
 
 <header>
-	<h1>Dmitry Ivanov</h1>
+	<h1><a href="/">Dmitry Ivanov</a></h1>
 	<p>Frontender</p>
 	<nav>		
 		<ul class="contacts-list">
@@ -20,19 +20,21 @@
 	</nav>
 </header>
 
-<aside>
-	<nav>
-		<ul class="site-nav">
-			<li><a href="/projects">Projects</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/blog/about-me">About</a></li>
-		</ul>
-	</nav>
-</aside>
+<div class="row">
+	<aside>
+		<nav>
+			<ul class="site-nav">
+				<li><a href="/projects">Projects</a></li>
+				<li><a href="/blog">Blog</a></li>
+				<li><a href="/blog/about-me">About</a></li>
+			</ul>
+		</nav>
+	</aside>
 
-<section>
-{{ content }}
-</section>
+	<section>
+	{{ content }}
+	</section>
+</div>
 
 <footer>
 2013
