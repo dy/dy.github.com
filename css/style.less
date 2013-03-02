@@ -37,14 +37,13 @@ h4, h5, h6 {
 }
 
 a {
-  color:@link;
-  font-weight:200;
-  text-decoration:none;
-}
-
-a:hover {
-  color:@hover;
-	text-decoration: underline;
+	color:@link;
+	font-weight:200;
+	text-decoration:none;
+	&:hover {
+		color:@hover;
+		text-decoration: underline;
+	}
 }
 
 small {
@@ -54,20 +53,20 @@ em {
 }
 
 strong {
-  font-weight:700;
+	font-weight:700;
 }
 
 ul li {
-  list-style: inside;
+	list-style: inside;
 }
 
 ol li {
-  list-style: decimal inside;
+	list-style: decimal inside;
 }
 
 blockquote {
-  margin: 0;
-  font-style: italic;
+	margin: 0;
+	font-style: italic;
 }
 
 dl, dt, dd, dl p {
@@ -75,37 +74,37 @@ dl, dt, dd, dl p {
 }
 
 dl dt {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 dl dd {
-  font-style: italic;
+	font-style: italic;
 }
 
 dl p {
-  font-style: italic;
+	font-style: italic;
 }
 
 hr {
-  border:0;
-  background:#ccc;
-  height:1px;
+	border:0;
+	background:#ccc;
+	height:1px;
 }
 
 /* Images */
 
 img {
-  position: relative;
-  margin: 0 auto;
-  max-width: 650px;
-  border: 1px solid #ccc;
+	position: relative;
+	margin: 0 auto;
+	max-width: 650px;
+	border: 1px solid #ccc;
 }
 
 
 /* Code blocks */
 code, pre {
-	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color:#000;
+	font-family: @mono;
+	color:#000;
 }
 
 pre {
@@ -120,49 +119,42 @@ pre {
 /* Tables */
 
 table {
-  width:100%;
-}
+	width:100%;
+	border: 1px solid #ccc;
+	text-align: left;
+	th {
+		font-weight: normal;
+		background: #232323;
+		color: #FDFEFB;
+	}
 
-table {
-  border: 1px solid #ccc;
-  text-align: left;
- }
-
-th {
-	font-weight: normal;
-  background: #232323;
-  color: #FDFEFB;
- }
-
-td {
+	td {
+	}
 }
 
 
 /* Header */
 
 header {
+	ul {
+		list-style:none;
+	}
 
-}
+	li {
+		list-style-type: none;
+	}
 
-header ul {
-  list-style:none;
-}
-
-header li {
-	list-style-type: none;
-}
-
-header li:hover {
+	li:hover {
+	}
 }
 
 aside{
-  .col(2, 12);
-  position: fixed;
+	.col(2, 12);
+	position: fixed;
 }
 
 
 /* Section - for main page content */
-
 section {
   .col(10, 12, 2)
 }
@@ -171,5 +163,4 @@ section {
 /* Footer */
 
 footer {
-  position:fixed;
 }
