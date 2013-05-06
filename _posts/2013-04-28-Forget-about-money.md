@@ -8,8 +8,7 @@ tags: [Jekyll, Workflow]
 sharing: true
 comments: true
 robots: index,follow
-alias: [/lessons/2012/1/20/jekyll-introduction/index.html]
-date: 22 January 2013
+date: 28 April 2013
 published: true
 ---
 All I want is just to forget about money.
