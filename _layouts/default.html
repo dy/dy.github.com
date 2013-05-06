@@ -1,0 +1,44 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<title>{{ page.title }}</title>
+
+<!--<link rel="stylesheet" href="/css/style.css">-->
+<link rel="stylesheet/less" type="text/css" href="/css/style.less" />
+<script src="/js/less.js" type="text/javascript"></script>
+
+<header>
+	<h1><a href="/">Dmitry Ivanov</a></h1>
+	<p>Frontender</p>
+	<nav>		
+		<ul class="contacts-list">
+			<li><a href="https://github.com/dfcreative">GitHub</a></li>
+			<li><a href="https://vk.com/id80775">vk</a></li>
+			<li><a href="callto:dfcreative">Skype</a></li>
+			<li><a href="mailto:df.creative@gmail.com">Mail</a></li>
+		</ul>
+	</nav>
+</header>
+
+<div class="row">
+	<aside>
+		<nav>
+			<ul class="site-nav">
+				<li><a href="/projects.html">Projects</a></li>
+				<li><a href="/blog.html">Blog</a></li>
+				<li><a href="/about.html">About</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<section>
+	{{ content }}
+	</section>
+</div>
+
+<footer>
+2013
+</footer>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/site.js"></script>

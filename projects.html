@@ -1,0 +1,26 @@
+---
+layout: default
+title: Projects
+---
+
+List of projects:
+{{site}}123
+{% for post in site.categories.projects %}
+<article class="project post">
+	<header class="post-header">
+		{{post.title}}
+	</header>
+	<div class="post-content">
+		{{post.content}}
+	</div>
+	<footer class="post-meta">
+		<nav class="tags">
+			<ul class="taglist">
+				{% for tag in post.tags %}
+				<li class="tag"><a href="/{{tag}}">{{tag}}</a></li>
+				{% endfor %}
+			</ul>
+		</nav>
+	</footer>
+</article>
+{% endfor %}

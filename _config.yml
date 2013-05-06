@@ -1,0 +1,9 @@
+markdown: kramdown
+permalink: /:categories/:title
+server: true
+auto: true
+url: http://localhost:4000
+base_url: /
+
+source: .
+destination: ./_site

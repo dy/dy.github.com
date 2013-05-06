@@ -1,0 +1,167 @@
+@import "reset";
+@import "variables";
+@import "mixins";
+
+/* Base text styles */
+body {
+  .ff;
+  .fs;
+	.bg;
+  .lh;
+  -webkit-font-smoothing: antialiased;
+  .vrhythm;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  .vr(2);
+  .fs(1.9);
+}
+
+p, ul, ol, table, dl {
+}
+
+h1,h2, h3 {
+  font-weight: normal;
+}
+
+h1 {
+}
+
+h2 {
+}
+
+h3 {
+}
+
+h4, h5, h6 {
+	font-weight: 700;
+}
+
+a {
+	color:@link;
+	font-weight:200;
+	text-decoration:none;
+	&:hover {
+		color:@hover;
+		text-decoration: underline;
+	}
+}
+
+small {
+}
+
+em {
+}
+
+strong {
+	font-weight:700;
+}
+
+ul li {
+	list-style: inside;
+}
+
+ol li {
+	list-style: decimal inside;
+}
+
+blockquote {
+	margin: 0;
+	font-style: italic;
+}
+
+dl, dt, dd, dl p {
+	font-color: #444;
+}
+
+dl dt {
+	font-weight: bold;
+}
+
+dl dd {
+	font-style: italic;
+}
+
+dl p {
+	font-style: italic;
+}
+
+hr {
+	border:0;
+	background:#ccc;
+	height:1px;
+}
+
+/* Images */
+
+img {
+	position: relative;
+	margin: 0 auto;
+	max-width: 650px;
+	border: 1px solid #ccc;
+}
+
+
+/* Code blocks */
+code, pre {
+	font-family: @mono;
+	color:#000;
+}
+
+pre {
+  background: #FDFEFB;
+  border-radius:4px;
+  border:1px solid #D7D8C8;
+  overflow: auto;
+  overflow-y: hidden;
+}
+
+
+/* Tables */
+
+table {
+	width:100%;
+	border: 1px solid #ccc;
+	text-align: left;
+	th {
+		font-weight: normal;
+		background: #232323;
+		color: #FDFEFB;
+	}
+
+	td {
+	}
+}
+
+
+/* Header */
+
+header {
+	ul {
+		list-style:none;
+	}
+
+	li {
+		list-style-type: none;
+	}
+
+	li:hover {
+	}
+}
+
+aside{
+	.col(2, 12);
+	position: fixed;
+}
+
+
+/* Section - for main page content */
+section {
+  .col(10, 12, 2)
+}
+
+
+/* Footer */
+
+footer {
+}
