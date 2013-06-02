@@ -1,0 +1,1 @@
+* Make projects as sub-modules to simplify updating of them

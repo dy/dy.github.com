@@ -15,4 +15,4 @@ published: true
 
 #Hi there
 
-Some_MD_to_out, like, content of your post etc. Plaiin MD.
+What I want in life is personal grow. Work by maximum, fast. Learn fast and lot. Have firm and strong leader. Try lots of things, do not hesitate. Be stupid, naive and natural. As Paulina in Interns.

@@ -13,6 +13,9 @@ date: 22 January 2013
 published: true
 ---
 
-#Hi there
+#Evaluate my site
 
-Some_MD_to_out, like, content of your post etc. Plaiin MD.
+1. Place "fork on github" ribbon.
+2. Place "Donate" button, as in [http://hexedit.duttke.de/](http://hexedit.duttke.de/).
+
+These create kind of possible collaboration and support actions from the other people. It should be developed.
