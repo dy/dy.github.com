@@ -123,10 +123,9 @@ import$(PNG.prototype, {
 
 		var blocks=Math.ceil(len/32768); //32768 - max block length?
 
-		s = s.concat( (len+ 5*blocks +6).bytes32() ); //length = dataLen + (btype+ lenx2 + nlenx2) + zlib_header + adler
-		s = s.concat(0x49, 0x44, 0x41, 0x54); //IDAT
-
+		s = s.concat( (len + 5*blocks + 6).bytes32() ); //length = dataLen + (btype+ lenx2 + nlenx2) + zlib_header + adler
 		var crcStart=s.length;
+		s = s.concat(0x49, 0x44, 0x41, 0x54); //IDAT
 		var crcLen=(len+5*blocks+6+4); //datalen + header
 
 		//zlib

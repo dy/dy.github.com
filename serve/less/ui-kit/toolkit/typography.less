@@ -1,0 +1,60 @@
+/* Mixins — set of helpers that covers frequent styling chunks that you’re lazy to type.
+--------------------------------- */
+.fs(@fontSize: 1) when (ispixel(@fontSize)){/* Multiplier of base fs */
+	font-size: @fontSize;
+}
+.fs(@fontSize: 1) when not (ispixel(@fontSize)){/* Multiplier of base fs */
+	font-size: (unit(@fontSize) * @fs);
+}
+.lh(@rows: 1) when not (ispixel(@rows)){ /*number of rows, not actual lh*/
+	line-height: (unit(@rows) * @lh)
+}
+.lh(@rows: 1) when (ispixel(@rows)){ /*number of rows, not actual lh*/
+	line-height: @rows
+}
+.ff(@fontFamily: @sans){
+	font-family: @fontFamily;
+}
+
+
+//Font sizes
+
+
+
+
+//Default font stacks
+
+
+//Text formatters
+
+
+
+// CSS3 Content Columns
+.content-columns(@columnCount, @columnGap: @gutter) {
+	-webkit-column-fill: balance;
+	-moz-column-fill: balance;
+	-o-column-fill: balance;
+	column-fill: balance;
+	-webkit-column-count: @columnCount;
+	 -moz-column-count: @columnCount;
+			column-count: @columnCount;
+	-webkit-column-gap: @columnGap;
+	 -moz-column-gap: @columnGap;
+			column-gap: @columnGap;
+}
+.content-columns(@columnCount, @columnWidth, @columnGap) {
+	-webkit-column-width: @columnWidth;
+	 -moz-column-width: @columnWidth;
+			column-width: @columnWidth;
+	.content-columns(@columnCount, @columnGap);
+}
+
+// Optional hyphenation
+.hyphens(@mode: auto) {
+	word-wrap: break-word;
+	-webkit-hyphens: @mode;
+	 -moz-hyphens: @mode;
+		-ms-hyphens: @mode;
+		 -o-hyphens: @mode;
+			hyphens: @mode;
+}

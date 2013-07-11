@@ -1,0 +1,42 @@
+{
+	"components": [{
+		//Description
+		"name": "Empty",
+		"description": "Empty component that just implements basic possibilities, not any suggestions.",
+		"thumb": "",
+		"category": "Basic",
+
+		"@class":"block",
+		"libraries":[],
+		"actions":{},
+		"resources":[],
+
+		//Model, or properties that supposed to be dynamic/editable througs settings
+		"@model":{
+			"@content":"Content that supposed to be rendered inside of block. It may contain any html or even markdown, if you want."
+			"@class"
+		}
+
+		//Parsing zone
+		"tags":["section","div"],
+		"classnames":["container","block","div","wrapper","hold"],
+		"selector": "",
+		"parse": function () {},
+
+		//Editing zone
+		"contextModifiers":["info"],
+		"settings":null,
+
+		//Rendering zone
+		"states": {
+			"default": {
+				"html": "<div class=''>{{@content}}</div>",
+				"class": "block"
+			},
+			"hover": {
+				"html": "<div class=''>{{}}</div>",
+				"class": "active☞"
+			}
+		}
+	}]
+}

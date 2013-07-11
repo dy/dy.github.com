@@ -1,0 +1,46 @@
+
+//=======================CHeckbox/radio input
+.checkbox, .radio{
+	.no-appearance;
+	background: fade(darken(@white, 2%), 80%);
+	.bshad(inset 0 1px 3px fade(@shadow, 35%));
+	color: @black;
+	border: none!important;
+	outline: none;
+	.w(.75);
+	.h(.75);
+	text-align: center;
+	.mr(.25);
+	position: relative;
+	.border-radius(1px);
+	.transition(.05s linear);
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: baseline;
+	position: relative;
+	bottom: -3px;
+
+	&.checked, &[checked], &:checked{
+		&:before{
+			content: "✓";
+			color: @black;
+			font-size: 14px;
+			font-weight: bolder;
+			opacity: 1;
+		};
+	}
+
+	&:before{
+		content: "✓";
+		opacity: 0;
+		font-size: 13px;
+		vertical-align: top;
+		.lh(.75);
+		display: inline-block;
+		font-weight: bolder;
+	}
+
+	a:hover &{
+		background: @white;
+	};
+}

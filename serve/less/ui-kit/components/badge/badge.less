@@ -1,0 +1,14 @@
+//Any tag function. Puffness is the intensity of pop/push
+.badge(@color:@black, @text:@textInverse, @puffness: 5%){
+	.no-link(@text, @text);
+	.puff(@color, @puffness);
+	.border-radius(@radius);
+	display: inline-block;
+	cursor: pointer;
+	span{
+		border-bottom: none;
+	}
+}
+.badge{
+	.badge
+}

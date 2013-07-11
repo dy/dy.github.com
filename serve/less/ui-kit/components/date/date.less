@@ -1,0 +1,82 @@
+/*  ndar things
+---------------------------*/
+//Like 19jan, 12:00;
+.datetime{
+	display: inline-block;
+	vertical-align: baseline;
+	color: @textLight;
+	.fs(14px);
+	.lh(1);
+	.ff(@narrow);
+	text-align: left;
+	letter-spacing: 0px;
+	word-spacing: 0px;
+	sup{
+		.ff(@sans);
+		display: block;
+		.fs(11px);
+		.p;
+		.m;
+		.pl(.05);
+		.mt(-.22);
+	}
+	small{
+		.ff(@narrow);
+		display: block;
+		vertical-align: baseline;
+		.fs(18px);
+		.p(0);
+		.mt(0);
+		color: @gray;
+		word-spacing: 0px;
+		letter-spacing: 0px;
+	}
+}
+
+//Like 19jan, mon etc (no time)
+.date{
+	.ff(@sans);
+	.lh(.7);
+	.pt(.35);
+	display: block;
+	.ph(.2);
+	border-right: 2px solid darken(@white,4%);
+	//font-weight: bold;
+	a{
+		.fs(13px);
+		display: block;
+		color: @text;
+		letter-spacing: -1px;
+		small{
+			.fs(12px);
+			font-weight: normal;
+			letter-spacing: 0;
+			color: @textLight;
+			display: block;
+		}
+		&:hover small{
+			color:@hover;
+		};
+	}
+	&.weekend{
+		a{
+			color: @red;
+		}
+	}
+
+	.navbar-inverse &{
+		border-color: @grayDark;
+		a{
+			color: @white;
+			&:hover{
+				color: @hover;
+			};
+		}		
+		&.weekend{
+			.bshad(inset 0 2px 0 @red);
+			small{
+			}
+		}
+	}
+
+}

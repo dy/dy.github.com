@@ -1,0 +1,99 @@
+//Ribbon-menue fromtop, like on products of kassa.bz
+.top-ribbon(@h:.3){
+	.grad(lighten(@grayLighter,22%), lighten(@grayLighter,16%));
+	position:absolute;
+    top: 0;
+    left: 0;
+    color:@text;
+    .p;
+    .mt(-@h);
+    .bshad(2px 2px 0 fade(@shadow, 20%));
+	.lh(1);
+	z-index: 2;
+	&:before {
+		border-color: transparent transparent @grayDark transparent;
+		position: absolute;
+		display: block;
+		border-style: solid;
+		right: (-@h * @lh * .8);
+		content: '';
+		z-index: 1;
+		top: 0;
+		border-width: 0 (@h * @lh * .8) (@h * @lh) 0;
+	}
+	&:after{
+		.tip-bottom((2*@lh), @ratio:.5, lighten(@grayLighter,16%));
+	};
+	ul{
+		.no-style;
+		li{
+			position: relative;
+			a{
+				display: block;
+				text-align: center;
+				.lh(2);
+				.w(2);
+				.h(2);
+				position: relative;
+				.link(@grayLight, @grayDarker);
+			}
+			&:after{
+				.shape;
+				.ph(.2);
+				width: 90%;
+				bottom: 0;
+				left:5%;
+				.h(1px);
+				background:fade(@grayLighter,20%);
+			};
+			&:last-child{
+				.h(1.75);
+			};
+			&:last-child:after{
+				content:none;
+			};
+		}		
+		&:after{
+		.tip-bottom((2*@lh), @ratio:.5, fade(@shadow, 20%));
+			z-index: 2;
+		bottom:(-@lh/2 - 2px);
+		left: 2px;
+		};
+	}
+}
+.top-ribbon{
+	.top-ribbon;
+}
+
+//Side ribbon from kudago
+.side-ribbon{
+	top: 0;
+	left: 0;
+	opacity: 1;
+	color: @white;
+	.puff(#EF3026, -3%);
+	.popped-left(5px, darken(#EF3026, 20%));
+	position:absolute;
+	.p(0, .3);
+	.bshad(3px 3px 0 fade(@shadow, 15%));
+	.lh(1);
+	.h(1);
+	.ff(@narrow);
+	z-index: 2;
+	a{
+		.link(@color: @white, @hover:@white, @offset:-1)
+	}
+	.transition(.15s linear opacity);
+	&:hover{
+		opacity: 1;
+	};
+}
+
+.side-ribbon-big{
+	.h(2);
+	.lh(2);
+	.fs(1);
+	.ff(@narrow);
+	.pl(1.33);
+	.popped-left;
+}

@@ -1,0 +1,187 @@
+//Default noname input-maker
+.input(@height: 1.5, @lh: 2, @color: @white, @text: @text){
+	display: inline-block;
+	vertical-align: top;
+	.p;
+	.m;
+	.ph(.5);
+	.vertical(@height, @lh);
+	.placeholder(@text);
+	border:none;
+	.bg(@white, 1);
+
+	position: relative;
+	.ff(@sans);
+	border: 1px solid #ccc;
+	color: @text;
+	font-size: .95em;
+	line-height: 1;
+	border-radius: 1px;
+	.bshad(0 1px 2px rgba(0, 0, 0, .1) inset);
+	.transition(border ease .5s);
+
+	//Inner specities
+	input{
+		.no-appearance;
+		.p;
+		.m;
+		.lh(@height);
+		.h(@height);
+		.pr(1);
+		&:visited, &:active, &:focus{
+			.no-appearance;
+		};
+		.placeholder(@text);
+	}
+
+	i{
+		.lh(@height);
+		.h(@height);
+		.w(0);
+		position: absolute;
+		right: 1.8em;
+		top: 0;
+		pointer-events:none;
+	}
+
+	//Validation
+	&.error{
+		border-color: #da3e5a;
+		box-shadow: 0 0 0 2px rgba(218, 62, 90, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+	}
+	&.success{
+		border-color: #18a011 ;
+		box-shadow: 0 0 0 2px rgba(24, 160, 17, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+	}
+	&.warning{
+
+	}
+
+	//States
+	&:focus{
+		outline: none;
+		border-color: #5ca9e4;
+		box-shadow: 0 0 0 2px rgba(70, 161, 231, .3), 0 1px 2px rgba(0, 0, 0, .2) inset;
+	};
+	&:active{
+	};
+	&:hover{
+	};
+	&.disabled{
+		border-color: #ccc;
+		box-shadow: 0 0 0 2px rgba(204, 204, 204, .3),0 1px 2px rgba(0, 0, 0, .2) inset;
+	}
+
+	//Interaction
+	&.counter{
+
+	}
+	&.spinner{
+
+	}
+	&.dropdown{
+
+	}
+	&.calendar{
+
+	}
+
+	//Input with no style
+	&.empty{
+		.no-appearance;
+	}
+}
+.input{
+	.input;
+}
+
+/* Styles
+---------------------------*/
+//When input drops shadow
+.input-popped(@depth: 2px){
+
+}
+.input-popped{
+	.input-popped;
+}
+//When input is deeper than content
+//TODO: default input is pushed;
+.input-pushed(@color:@input, @textColor:@inputText, @h: 1.5, @lh:2){
+	display: inline-block;
+	vertical-align: middle;
+	.p;
+	.m;
+	.ph(.5);
+	.h(@h);
+	.fs(14px);
+	.ff(@sans);
+	.lh(@h*.5);
+	.placeholder(fade(@textColor, 50%));
+	.tshad(none);
+	border:none;
+	.bg(@color, .1);
+	.appearance(none);
+	.puff(@color, -15%);
+	.bshad(inset 0 1px 3px @shadow);
+	color: @textColor;
+}
+.input-pushed{
+	.input-pushed;
+}
+
+
+/* States
+------------------------*/
+//No hover
+.input-normal{
+
+}
+.input-hover(@color: @blue){
+
+}
+.input-active(@color: @blue){
+
+}
+.input-focus(@color: @orange){
+
+}
+.input-disabled{
+
+}
+.input-disabled{
+	.input-disabled;
+}
+
+/* Icon
+----------------------------*/
+.input-search{
+
+}
+.input-progress{
+
+}
+.input-icon(@icon){
+
+}
+
+
+/* Specials types
+--------------------------------*/
+//search
+
+//email
+
+//http
+
+//pass
+
+//
+
+/* Styling properties (as Typer ones)
+color & bg; 
+----------------------------------*/
+.input-size(){
+
+}
+
+

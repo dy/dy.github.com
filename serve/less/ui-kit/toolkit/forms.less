@@ -1,0 +1,36 @@
+// User select
+// For selecting text on the page
+.user-select(@select) {
+	-webkit-user-select: @select;
+	 -moz-user-select: @select;
+		-ms-user-select: @select;
+		 -o-user-select: @select;
+			user-select: @select;
+	-webkit-touch-callout: @select;
+}
+
+// Resize anything
+.resizable(@direction) {
+	resize: @direction; // Options: horizontal, vertical, both
+	overflow: auto; // Safari fix
+}
+
+///Clear input appearance
+.appearance(@app: none){
+	-webkit-appearance:@app;
+	-moz-appearance:@app;
+	-o-appearance:@app;
+	appearance:@app;
+}
+
+.placeholder(@color: @placeholderText) {
+	&:-moz-placeholder {
+	color: @color;
+	}
+	&:-ms-input-placeholder {
+	color: @color;
+	}
+	&::-webkit-input-placeholder {
+	color: @color;
+	}
+}

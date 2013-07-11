@@ -1,0 +1,153 @@
+//Button mixin - creates button basen on params passed
+.button(@h:2, @lh:2, @color: @grayDark, @hover: @gray, @text: @textInverse, @puffness: 13%){
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	.ph(1); //TODO: calc;
+	.pv(0);
+	font-weight: bold;
+	.no-link;
+	.m;
+	.border-radius(@radius);
+	letter-spacing: .02em;
+	.vertical(1.5, 2, 50%);
+	.fs(15px);
+	.ff(@sansCaption);
+	.link-body(@text, @text, @text);
+
+	/* Sizes */
+	&.big{
+		.vertical(1.75, 2, 50%);
+		.ph(1.5);
+		.fs(18px);
+		//letter-spacing: 1px;
+	}
+	&.small{
+		.vertical(1.25, 2, 50%);
+		.ph(1);
+		.fs(12px);
+	}
+	&.normal{
+		.vertical(1.5, 2, 50%);
+		.ph(1);
+		.fs(15px);
+	}
+
+	/* Round status */
+	@r: (@radius);
+	&.square{
+		@r: 0;
+	}
+	&.radius{
+		@r: (@radius);
+	}
+	&.round{
+		@r: @h;
+	}
+	.border-radius(@r);
+
+
+	/* Colors */
+	@sh: @shadow;
+	.button-popped(@color, @text, @hover, @puffness, 3px);
+	&.blue{
+		.button-popped(@blue, @text, lighten(@blue, 6%), @puffness, 3px);
+	}
+	&.gray{
+		.button-popped(@gray, @text, lighten(@gray, 6%), @puffness, 3px);
+	}
+	&.red{
+		.button-popped(@red, @text, lighten(@red, 6%), @puffness, 3px);
+	}
+	&.black{
+		.button-popped(@black, @text, lighten(@black, 6%), @puffness, 3px);
+	}
+	&.orange{
+		.button-popped(@orange, @text, lighten(@orange, 6%), @puffness, 3px);
+	}
+	&.green{
+		.button-popped(@green, @text, lighten(@green, 6%), @puffness, 3px);
+	}
+}
+
+//Button visuals
+.button-popped(@color:@red, @text: @text, @hover: @hover, @puffness:5%, @popp:2px){
+	border:none;
+	.appearance(none);
+	.puff(@color, @puffness);
+	@off: 8%;
+	@shad: 	0 (@popp - 1) darken(@color, (@puffness + @off)),
+			0px ((@popp - 1) * 2 ) (2 + @popp*.2) (@popp * .05) fade(@shadow, 45%),
+			0 1px darken(@color, (-@puffness/2 + @off)) inset,
+			0 -1px darken(@color, (@puffness/2 + @off)) inset,
+			0 0 0 1px darken(@color, ( @off)) inset,
+			0 0 0 2px fade(lighten(@color, (@puffness/2 + @off)), 45%) inset;
+	.bshad(@shad);
+	color: @text;
+	.tshad(0 -1px 0 darken(@color, (@puffness/2 + @off)));
+	&:hover{
+		.puff(@hover, @puffness);
+	};
+}
+.button-pushed(@bg, @text, @popp, @puff){
+
+}
+
+.button{
+	.button;
+}
+
+
+
+
+
+
+//TODO: create button states based on button properties passed
+.button-states(){
+	&:hover{
+	};
+	&:active{
+	};
+}
+
+
+
+
+
+
+/*Button groups
+--------------------*/
+//TODO: Button-groups
+.button-group(@color: @red, @text: @text, @p: 10%){
+	.inline;
+	button{
+		//.button(@color, @text, @p);
+		.inline;
+		&.active{
+			.m;
+		}
+		&:first-child{
+			.button-left;
+		};
+		&:last-child{
+			.button-right;
+		};
+	}
+}
+.button-left{
+	.border-top-right-radius(0);
+	.border-bottom-right-radius(0);
+}
+.button-center{
+
+}
+.button-right{
+	.border-top-left-radius(0);
+	.border-bottom-left-radius(0);
+}
+
+//TODO: make icons of button;
+.button-icon(@icon:none){
+
+}

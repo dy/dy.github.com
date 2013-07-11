@@ -1,0 +1,203 @@
+/* List of universal decorators applicable to almost any element.
+Specific decorators are placed inside components. Like .big on button.
+----
+What are decorators?
+Decorators are more than just effects: they include element generation, whether it pseudo-ones or web-components.
+Decorators are not components: they’re not supposed to be used alone, usually.
+*/
+
+//clearing decorators
+.no-style{ //style resetter
+	list-style:none;
+	.m;
+	.p;
+}
+.no-appearance{
+	background: none;
+	outline:none;
+	border:none;
+	.bshad(none);
+	.appearance(none);
+}
+
+
+/* Content decorators
+-----------------------*/
+//Element pops out, kind of wrapping of content
+.popped(@size: @pop, @color: @black){
+	.popped-left(@size, @color);
+	.popped-right(@size, @color);
+}
+.popped-left(@size: @pop, @color: @black){
+	.ml(-@size);
+	//.bshad(0 1px 9px rgba(120, 100, 110, .7));
+	position: relative;
+	&:before{
+		border-color: @color transparent transparent transparent;
+		position: absolute;
+		display: block;
+		border-style: solid;
+		.b(-@size);
+		content: '';
+		z-index: 1;
+		left: 0;
+		border-width: @size 0 0 @size;
+	};
+}
+.popped-right(@size: @pop, @color: @black){
+	.mr(-@size);
+	//.bshad(0 1px 9px rgba(120, 100, 110, .7));
+	z-index: 1;
+	position: relative;	
+	&:after{
+		border-color: @color transparent transparent transparent;
+		position: absolute;
+		display: block;
+		border-style: solid;
+		bottom: (-@size);
+		content: '';
+		z-index: 1;
+		right: 0;
+		border-width: @size @size 0 0;
+	};
+}
+.popped-right{
+	.popped-right;
+}
+.popped-left{
+	.popped-left;
+}
+
+
+
+//Ribbons makes a small tip at the corner, makin an illusion of crease
+//TODO: resurrect omitted angle;
+.crease-bottom-left(@size: @pop, @color: @gray){
+	.triangle-top-right(@size, @size);
+	color: @color;
+	background: none;
+	position: absolute;
+	display: block;
+	z-index: 1;
+	.l(0);
+	.b((-@size));
+}
+.crease-top-right(@size: @pop, @color: @gray){
+	.triangle-bottom-left(@size, @size);
+	color: @color;
+	background: none;
+	position: absolute;
+	display: block;
+	z-index: 1;
+	.r(0);
+	.t((-@size));
+}
+.crease-bottom-right(@size: @pop, @color: @gray){
+	.triangle-top-left(@size, @size);
+	color: @color;
+	background: none;
+	position: absolute;
+	display: block;
+	z-index: 1;
+	.r(0);
+	.b((-@size));
+}
+.crease-top-left(@size: @pop, @color: @gray){
+	.triangle-bottom-right(@size, @size);
+	color: @color;
+	background: none;
+	position: absolute;
+	display: block;
+	z-index: 1;
+	.l(0);
+	.t((-@size));
+}
+
+
+/*Element is pushed down to the depth of content*/
+.pushed(@size: @pop, @color: @black){
+	.mh(@size);
+	//.bshad(inset 0 -5px 9px black);
+	z-index: 1;
+	position: relative;
+	&:before{
+		border-color: transparent transparent @color transparent;
+		position: absolute;
+		display: block;
+		border-style: solid;
+		bottom: 0;
+		content: '';
+		z-index: 1;
+		left: -@pop;
+		border-width: 0 0 @pop @pop;
+	};
+	&:after{
+		border-color: transparent transparent @color transparent;
+		position: absolute;
+		display: block;
+		border-style: solid;
+		bottom: 0;
+		content: '';
+		z-index: 1;
+		right: -@pop;
+		border-width: 0 @pop @pop 0;
+	};
+}
+
+
+
+
+
+
+
+
+
+//Tips are arrows aside of elements, tooltip-like
+.tip-left(@size: 20px, @color: @white, @ratio:1){
+	z-index: 2;
+	position: relative;
+	content:'';
+	border: (@size/2) solid;
+	border-left-width: 0;
+	border-right-width: (@ratio * @size / 2);
+	border-color:transparent @color transparent transparent;
+	position: absolute;
+	top: 0;
+	left: (-@ratio * @size * .5);
+}
+.tip-right(@size, @color, @ratio:1){
+	z-index: 2;
+	position: relative;
+	content:'';
+	border: (@size/2) solid;
+	border-right-width: 0;
+	border-left-width: (@ratio * @size / 2);
+	border-color:transparent transparent transparent @color;
+	position: absolute;
+	top: 0;
+	right: (-@ratio * @size * .5);
+}
+.tip-bottom(@size, @color, @ratio:1){
+	z-index: 2;
+	position: relative;
+	content:'';
+	border: (@size/2) solid;
+	border-bottom-width: 0;
+	border-top-width: (@ratio * @size / 2);
+	border-color: @color transparent transparent transparent;
+	position: absolute;
+	left: 0;
+	bottom: (-@ratio * @size * .5);
+}
+.tip-top(@size, @color, @ratio:1){
+	z-index: 2;
+	position: relative;
+	content:'';
+	border: (@size/2) solid;
+	border-top-width: 0;
+	border-bottom-width: (@ratio * @size / 2);
+	border-color:fade(@color, 0%) fade(@color, 0%) @color fade(@color, 0%);
+	position: absolute;
+	left: 0;
+	top: (-@ratio * @size * .5);
+}

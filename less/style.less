@@ -1,0 +1,11 @@
+@import "ui-kit/main.less";
+
+section{
+	margin: auto;
+	width: 60%;
+	//depends on width of block, slowly
+	//font-size: calc-live($("section").width)
+
+	//line-height depends of width of string: number o;
+	font-size: ~'function(){return this.width}';
+}

@@ -1,0 +1,216 @@
+@ulHeight: 12;
+.underline(@height: @ulHeight, @color: @text, @thickness: 1, @offset: 0){
+	@patternGen: `function(h, thick, offset){
+		var space = "", line = "";
+		//make line
+		for (var i = 0; i < thick; i++){
+			line += "01"
+		}
+		//make space
+		for (var i = 0; i < h; i++){
+			space += "00"
+		}
+		return space.slice(0, (space.length) + offset*2 - thick*2 ) + line + space.slice(space.length + offset*2);
+	}`;
+	@pattern: `(@{patternGen})(@{height}, @{thickness}, @{offset})`;
+	background-position: 0 bottom;
+	background-repeat: repeat-x;
+	.png(@stream: @pattern, @w: 1, @h: unit(@height), @color: @color);
+}
+.underline{
+	.underline();
+	
+}
+.underline.thick{
+	.underline(@thickness: 2);
+}
+.underline.offset{
+	
+}
+.underline.transparent{
+	.underline(@color: fade(@text, 30%), @thickness: 1);
+}
+
+.waved(@height: @ulHeight, @color: @red, @thickness: 2, @width: 4, @offset: 0){
+	@patternGen: `function(h, w, thick){
+		var space = "", wave = "";
+		//make wave
+		for (var y = 0; y < thick; y++){
+			for (var x = 0; x < w; x++){
+				if (x < w/2){
+					if (y < thick/2) {
+						wave += "00"
+					} else{
+						wave += "01"
+					}
+				} else {
+					if (y < thick/2) {
+						wave += "01"
+					} else{
+						wave += "00"
+					}
+				}
+			}
+		}
+		//make space
+		for (var i = 0; i < (h - thick)*w; i++){
+			space += "00"
+		}
+		return space + wave;
+	}`;
+	@pattern: `(@{patternGen})(@{height}, @{width}, @{thickness})`;
+	.png(@stream: @pattern, @w: unit(@width), @h: unit(@height), @color: @color);
+	background-position: 0 bottom;
+	background-repeat: repeat-x;
+}
+.waved{
+	.waved();	
+}
+
+.dotted(@height: @ulHeight, @color: @text, @width: 3, @thickness: 1, @offset: 0){
+	@patternGen: `function(h, thick, w, offset){
+		var space = "", line = "";
+		//make line
+		for (var i = 0; i < thick; i++){
+			for(var x = 0; x < thick; x++){
+				line += "01";
+			}
+			for(var x = thick; x < w; x++){
+				line += "00";
+			}
+		}
+		//make space
+		for (var i = 0; i < h*w; i++){
+			space += "00"
+		}
+		return space.slice(0, (space.length) + offset*w*2 - thick*w*2 ) + line + space.slice(space.length + offset*w*2);
+		//return space + line;
+	}`;
+	@pattern: `(@{patternGen})(@{height}, @{thickness}, @{width}, @{offset})`;	
+	.png(@stream: @pattern, @w: unit(@width), @h: unit(@height), @color: @color);
+	background-position: 0 bottom;
+	background-repeat: repeat-x;
+}
+.dotted{
+	.dotted;	
+}
+.dotted.rare{
+	.dotted(@width: 6);
+}
+.dotted.thick{
+	.dotted(@width: 6, @thickness: 2);
+}
+.dashed(@height: @ulHeight, @color: @text, @width: 8, @thickness: 1, @length: 4, @offset: 0){
+	@patternGen: `function(h, thick, w, l, offset){
+		var space = "", line = "";
+		//make line
+		for (var i = 0; i < thick; i++){
+			for(var x = 0; x < l; x++){
+				line += "01";
+			}
+			for(var x = l; x < w; x++){
+				line += "00";
+			}
+		}
+		//make space
+		for (var i = 0; i < h*w; i++){
+			space += "00"
+		}		
+		return space.slice(0, (space.length) + offset*w*2 - thick*w*2 ) + line + space.slice(space.length + offset*w*2);
+		//return space + line;
+	}`;
+	@pattern: `(@{patternGen})(@{height}, @{thickness}, @{width}, @{length}, @{offset})`;	
+	.png(@stream: @pattern, @w: unit(@width), @h: unit(@height), @color: @color);
+	background-position: 0 bottom;
+	background-repeat: repeat-x;
+}
+.dashed{
+	.dashed;
+	
+}
+.dashed.rare{
+	.dashed(@width: 6);
+}
+.dashed.thick{
+	.dashed(@width: 10, @thickness: 2, @length: 6);
+}
+.dot-dashed(@height: @ulHeight, @color: @text, @width: 10, @thickness: 1, @offset: 0){
+	@patternGen: `function(h, thick, w){
+		var space = "", line = "";
+		//make line
+		for (var i = 0; i < thick; i++){
+			for(var x = 0; x < w; x++){
+				switch (true){
+					case (x > w*.75):
+						line += "00";
+						break;
+					case (x > w*.375):
+						line += "01";
+						break;
+					case (x > w*.125):
+						line += "00";
+						break;
+					default:
+						line += "01";
+				}
+			}
+		}
+		//make space
+		for (var i = 0; i < (h - thick)*w; i++){
+			space += "00"
+		}
+		return space + line;
+	}`;
+	@pattern: `(@{patternGen})(@{height}, @{thickness}, @{width})`;
+	.png(@stream: @pattern, @w: unit(@width), @h: unit(@height), @color: @color);
+	background-position: 0 bottom;
+	background-repeat: repeat-x;
+}
+.dot-dashed{
+	.dot-dashed;
+	
+}
+.dot-dashed.thick{
+	.dot-dashed(@width: 10, @thickness: 2);
+}
+
+.pattern(@height: @ulHeight, @color: @text, @width: 8, @thickness: 1, @length: 4, @pattern: ". -"){
+	
+}
+
+
+
+//Mixin that generates PNG to background
+.png(@stream: "0001", @w: 2, @h: 2, @color: black){
+
+	@r: red(@color);
+	@g: green(@color);
+	@b: blue(@color);
+	@hexColor: rgb(red(@color),green(@color),blue(@color));
+	@PLTE: `"ffffff" + ("@{hexColor}").substr(1)`; //Make bytes palette: first-white, rest-passed color;
+
+	@a: alpha(@color);
+	@tRNS: `"00" + (function(){ var a = Math.round(@{a} * 255).toString(16); return (a.length == 1 ? "0" + a : a) })()`;
+
+	@background: `(function(){
+		var png = new PNG();
+		
+		png.set({
+			width: @{w},
+			height: @{h},
+			chunks:{
+				PLTE: @{PLTE},
+				tRNS: @{tRNS}
+			},
+			data: @{stream}
+		})
+
+		return "url(" + png.toDataURL() + ")";
+	})()`;
+
+	background-image: ~"@{background}";
+}
+
+.png{
+	.png();
+}

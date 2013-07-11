@@ -1,0 +1,109 @@
+@debug: 1;
+
+/* Sizes */
+@fs: 19px; //Pixels are more preferrable than any other. Unfortunately, browsers render fonts to the pixel grid, so it’s the most fluid unit
+@lh: 20px; /*Do not make lh font-dependent, like 1.1 or 120%.*/
+@gutter: 0;
+@grid: 12;
+@thin: 3px; //Default thin space size
+
+@pop: 8px; //Default amount of pop (shadows, pop/push decorator etc)
+
+@containerWidth: 1024px; //width of centered-container (may be easily ignored)
+@asideWidth: 13*@lh;
+
+//TODO: make typographic-scale sizes;
+
+@radius: 4px; //cross-styles-radius
+
+/* Fonts */
+@sansNeutral: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@sansCaptionNeutral: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@narrowNeutral: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@serifNeutral: Georgia, "Times New Roman", Times, serif;
+@serifCaptionNeutral: Georgia, "Times New Roman", Times, serif;
+@slabNeutral: Georgia, "Times New Roman", Times, serif;
+@slabCaptionNeutral: Georgia, "Times New Roman", Times, serif;
+@monoNeutral: Monaco, Menlo, Consolas, "Courier New", monospace;
+
+@sans: 				@sansNeutral;
+@sansCaption: 		@sansCaptionNeutral;
+@narrow: 			@narrowNeutral;
+@condensed:			@narrowNeutral;
+@serif: 			@serifNeutral;
+@serifCaption: 		@serifCaptionNeutral;
+@slab: 				@slabNeutral;
+@slabCaption: 		@slabCaptionNeutral;
+@mono: 				@monoNeutral;
+
+
+/* Colors */
+//TODO: warmer and cooler functions;
+@black:                 #000;
+@grayDarker:            darken(@grayDark, 10%);
+@grayDark:              darken(@gray, 10%);
+@gray:                  gray;
+@grayLight:             lighten(@gray, 10%);
+@grayLighter:           lighten(@grayLight, 10%);
+@white:                 #fff;
+
+@red: rgb(255, 44, 0);
+@orange: saturate(lighten(rgb(255, 165, 0),5%),50%);
+@beige: rgb(245, 239, 228);
+@blue: mix(rgb(119, 192, 221), rgb(53, 160, 214), 20%);
+@yellow: rgb(255, 225, 20);
+@green: lighten(desaturate(spin(rgb(44, 173, 54), 3%),5%),10%);
+
+@text: rgb(82, 87, 92);
+@textLight: rgb(146, 150, 155);
+@textLighter: lighten(@text,50%);
+@textInverse: #f1f1f1;
+@header: rgb(46, 52, 53);
+@headerInverse: rgb(254,255,255);
+
+@link: @orange;
+@linkInverse: #c8c8c7;
+@linkOpacity: 25%;
+@linkExtinguishedRed: lighten(desaturate(@link,20%),0%);
+@linkExtinguishedBlue: rgb(186, 198, 204);
+@hover: @red;
+@visited: @red;
+@active: @red;
+
+@input: @black;
+@inputText: @grayDarker;
+
+@fav: rgb(235, 207, 165);
+@like: @red;
+@favChecked: rgb(250, 170, 51);
+@likeChecked: rgb(241, 88, 79);
+
+@bg: rgb(238,238,238);
+@bgInverse: rgb(19, 21, 22);
+
+@nav: rgb(227,229,226);
+@navInverse: rgb(30,31,31);
+
+@articleBorder: rgb(236, 238, 240);
+
+@error: @red;
+@success: @green;
+@warning: @yellow;
+@info: @blue;
+
+
+//Lighting properties
+@shadow: @black;
+@light: #fff; //Results on the hue of effects, as if objects were lit with light of that temperature
+@lightDirection: 90deg; //Results on the direction of shadows dropped etc
+
+
+//Media queries
+@tiny: ~"all and (max-width: 800px)";
+@small: ~"all and (max-width: 1024px)";
+@medium: ~"all and (max-width: 1280px)";
+@big: ~"all and (max-width: 1600px)";
+@huge: ~"all and (max-width: 3000px)";
+
+//Anims
+@animSpeed: 220ms;

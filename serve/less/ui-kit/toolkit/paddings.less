@@ -1,0 +1,118 @@
+/*Margin * padding in lh setters*/
+.m(@m: 0){
+	margin:(@m * @lh);
+}
+.m(@mv, @mh) when (isnumber(@mh)) and (isnumber(@mv)) {
+	margin:(@mv * @lh) (@mh * @lh);
+}
+.m(@mv, @mh) when (@mh = auto) {
+	margin:(@mv * @lh) @mh;
+}
+.m(@mv, @mh) when (@mv = auto) {
+	margin:@mv (@mh * @lh);
+}
+.m(@mv, @mh) when (@mv = auto) and (@mh = auto) {
+	margin:@mv @mh;
+}
+.m(@mt, @mh, @mb){
+	margin:(@mt * @lh) (@mh * @lh) (@mb * @lh);
+}
+.m(@mt, @mr, @mb, @ml){
+	margin:(@mt * @lh) (@mr * @lh) (@mb * @lh) (@ml * @lh);
+}
+.ml(@m:0) when not (isnumber(@m)), (iskeyword(@m)), (ispercentage(@m)), (ispixel(@m)), (@m = auto) {
+	margin-left: @m
+}
+.ml(@m) when not (iskeyword(@m)) and not (ispercentage(@m)) and not (ispixel(@m)) and not (@m = auto) and (isnumber(@m)){
+	margin-left: (unit(@m) * @lh)
+}
+.mr(@m: 0) when (iskeyword(@m)), (ispercentage(@m)) , (ispixel(@m)), (@m = auto), not (isnumber(@m)){
+	margin-right: @m
+}
+.mr(@m: 0) when not (ispercentage(@m)) and not (ispixel(@m)) and not (@m = auto) and (isnumber(@m)){
+	margin-right: (unit(@m) * @lh)
+}
+.mt(@m: 0) when (ispercentage(@m)) , (ispixel(@m)), not (isnumber(@m)){
+	margin-top: (@m)	
+}
+.mt(@m: 0) when not (ispercentage(@m)) and not (ispixel(@m)) and (isnumber(@m)){
+	margin-top: (@m * @lh)
+}
+.mb(@m: 0) when (ispercentage(@m)) , (ispixel(@m)), not (isnumber(@m)){
+	margin-bottom: (@m)	
+}
+.mb(@m: 0) when not (ispercentage(@m)) and not (ispixel(@m)) and (isnumber(@m)){
+	margin-bottom: (@m * @lh)
+}
+.mv(@m: 0){
+	.mt(@m);
+	.mb(@m);
+}
+.mv(@mt, @mb){
+	.mt(@mt);
+	.mb(@mb);
+}
+.mh(@m:0) when not (@m = auto){
+	.ml(@m);
+	.mr(@m);
+}
+.mh (@m) when (@m = auto){
+	.ml(auto);
+	margin-right: auto;
+}
+.mh(@ml, @mr){
+	.ml(@ml);
+	.mr(@mr);
+}
+.p(@padding: 0){
+	padding:(@padding * @lh);
+}
+.p(@pv, @ph){
+	padding:(@pv * @lh) (@ph * @lh);
+}
+.p(@pt, @ph, @pb){
+	padding:(@pt * @lh) (@ph * @lh) (@pb * @lh);
+}
+.p(@pt, @pr, @pb, @pl){
+	padding:(@pt * @lh) (@pr * @lh) (@pb * @lh) (@pl * @lh);
+}
+.pl(@p:0) when (ispercentage(@p)), (ispixel(@p)), (@p = auto), not (isnumber(@p)){
+	padding-left: @p
+}
+.pl(@p) when not (ispercentage(@p)) and not (ispixel(@p)) and not (ispixel(-@p)) and not (@p = auto) and (isnumber(@p)){
+	padding-left: (unit(@p) * @lh)
+}
+.pr(@p: 0) when (ispercentage(@p)) , (ispixel(@p)), (@p = auto), not (isnumber(@p)){
+	padding-right: @p
+}
+.pr(@p: 0) when not (ispercentage(@p)) and not (ispixel(@p)) and not (@p = auto) and (isnumber(@p)){
+	padding-right: (unit(@p) * @lh)
+}
+.pt(@p: 0) when (ispercentage(@p)) , (ispixel(@p)), not (isnumber(@p)){
+	padding-top: (@p)	
+}
+.pt(@p: 0) when not (ispercentage(@p)) and not (ispixel(@p)) and (isnumber(@p)){
+	padding-top: (@p * @lh)
+}
+.pb(@p: 0) when (ispercentage(@p)) , (ispixel(@p)), not (isnumber(@p)){
+	padding-bottom: (@p)	
+}
+.pb(@p: 0) when not (ispercentage(@p)) and not (ispixel(@p)) and (isnumber(@p)){
+	padding-bottom: (@p * @lh)
+}
+.pv(@p: 0){
+	.pt(@p);
+	.pb(@p);
+}
+.pv(@pt, @pb){
+	.pt(@pt);
+	.pb(@pb);
+}
+.ph(@p:0){
+	.pl(@p);
+	.pr(@p);
+}
+.ph(@pl, @pr){
+	.pl(@pl);
+	.pr(@pr);
+}

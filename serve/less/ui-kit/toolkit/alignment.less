@@ -1,0 +1,17 @@
+//Centrize height inside of line-height, with displacement
+.vertical(@h:1.5, @lh:2, @displace:50%) when (ispercentage(@displace)){
+	vertical-align: top;
+	.h(@h);
+	.lh(@h);
+	@t: (1 - unit(@displace) * .01);
+	@b: (unit(@displace) * .01);
+	.mv(((@lh - @h) * @t), ((@lh - @h) * @b));
+}
+.vertical(@h:1.5, @lh:2, @displace: .5) when not (ispercentage(@displace)){	
+	vertical-align: top;
+	.h(@h);
+	.lh(@h);
+	@t: (1 - @displace);
+	@b: @displace;
+	.mv(((@lh - @h) * @t), ((@lh - @h) * @b));
+}

@@ -1,0 +1,44 @@
+//TODO: make adaptive techniques;
+.centered-container(@width){
+	.mh(auto);
+	position: relative;
+	.w(@width);
+}
+.centered-container(){
+	.centered-container;
+}
+
+
+//Fixed aside column
+@aw: @asideWidth;
+.main-col{
+	position: relative;
+}
+.aside-col(@w: @aw){
+	display: block;
+	//position: absolute;
+	//right: 0;
+	position: relative;
+	.w(@w);
+	min-height: 100%;
+}
+.aside-col-left(@w: @aw){
+	.aside-col(@w);
+	float: left;
+	+ .main-col{
+		.ml(@w);
+	}
+}
+.aside-col-left{
+	.aside-col-left;
+}
+.aside-col-right(@w: @aw){
+	.aside-col(@w);
+	float: right;
+	+ .main-col{
+		.mr(@w);
+	}
+}
+.aside-col-right{
+	.aside-col-right;
+}

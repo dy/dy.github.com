@@ -1,0 +1,61 @@
+.list{
+}
+.list-inline{
+	.no-style;
+	> li{
+		.inline;
+		&:before{
+			content:none;
+		};
+	}
+}
+
+//TODO
+.list-dots{
+	.no-style;
+	> li{
+		&:before{
+			content: "•";
+			.mr(.4);
+		};
+	}
+}
+
+.list-dashes{
+
+}
+
+.list-squares{
+
+}
+
+.list-circles{
+
+}
+
+.list-todo{
+	
+}
+
+
+.comma-separated{
+	.list-inline;
+	li:after{
+		content: ", "
+	};
+	li:last-child:after{
+		content: none;
+	};
+}
+.sentence{
+	.comma-separated;
+	li:first-letter{
+		text-transform: lowercase;
+	};
+	li:first-child:first-letter{
+		text-transform: uppercase;
+	};
+	li:last-child:after{
+		content: ".";
+	};
+}

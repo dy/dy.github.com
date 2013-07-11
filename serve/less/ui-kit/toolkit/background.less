@@ -1,0 +1,133 @@
+/* BG & Color
+------------------------*/
+.bg(@color: none){
+	background: none;
+}
+.bg(@color, @alpha: 1){
+	background: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+}
+
+.grad(@grad) {
+	background: -moz-linear-gradient(@grad); // FF 3.6+
+	background: -webkit-linear-gradient(@grad); // Safari 5.1+, Chrome 10+
+	background: -o-linear-gradient(@grad); // Opera 11.10
+	background: linear-gradient(@grad); // Standard, IE10	
+}
+.grad(@startColor, @endColor) {
+	background-color: mix(@startColor, @endColor, 60%); 
+	background: -moz-linear-gradient(top, @startColor, @endColor); // FF 3.6+
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+	background: -webkit-linear-gradient(top, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+	background: -o-linear-gradient(top, @startColor, @endColor); // Opera 11.10
+	background: linear-gradient(to bottom, @startColor, @endColor); // Standard, IE10
+	background-repeat: repeat-x;
+	filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+.grad(@dir, @gradTop, @gradBot) {
+	background-color: @gradBot;	
+	background: -moz-linear-gradient(@dir, @gradTop, @gradBot); // FF 3.6+
+	background: -webkit-linear-gradient(@dir, @gradTop, @gradBot); // Safari 5.1+, Chrome 10+
+	background: -o-linear-gradient(@dir, @gradTop, @gradBot); // Opera 11.10
+	background: linear-gradient(@dir, @gradTop, @gradBot); // Standard, IE10
+}
+.grad(@dir, @c1, @s1, @c2, @s2, @c3, @s3, @c4, @s4, @c5, @s5, @c6, @s6){
+	background-color: mix(@c1, @c3, 60%); 
+	background: -moz-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4, @c5 @s5, @c6 @s6); // FF 3.6+
+	//background: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+	background: -webkit-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4, @c5 @s5, @c6 @s6); // Safari 5.1+, Chrome 10+
+	background: -o-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4, @c5 @s5, @c6 @s6); // Opera 11.10
+	background: linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4, @c5 @s5, @c6 @s6); // TODO Standard, IE10
+	background-repeat: repeat-x;
+	//filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+.grad(@dir, @c1, @s1, @c2, @s2, @c3, @s3, @c4, @s4, @c5, @s5){
+	background-color: mix(@c1, @c3, 60%); 
+	background: -moz-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4, @c5 @s5); // FF 3.6+
+	//background: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+	background: -webkit-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4, @c5 @s5); // Safari 5.1+, Chrome 10+
+	background: -o-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4, @c5 @s5); // Opera 11.10
+	background: linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4, @c5 @s5); // TODO Standard, IE10
+	background-repeat: repeat-x;
+	//filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+.grad(@dir, @c1, @s1, @c2, @s2, @c3, @s3, @c4, @s4){
+	background-color: mix(@c1, @c3, 60%); 
+	background: -moz-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4); // FF 3.6+
+	//background: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+	background: -webkit-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4); // Safari 5.1+, Chrome 10+
+	background: -o-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4); // Opera 11.10
+	background: linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3, @c4 @s4); // TODO Standard, IE10
+	background-repeat: repeat-x;
+	//filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+.grad(@dir, @c1, @s1, @c2, @s2, @c3, @s3){
+	background-color: mix(@c1, @c3, 60%); 
+	background: -moz-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3); // FF 3.6+
+	//background: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+	background: -webkit-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3); // Safari 5.1+, Chrome 10+
+	background: -o-linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3); // Opera 11.10
+	background: linear-gradient(@dir, @c1 @s1, @c2 @s2, @c3 @s3); // TODO Standard, IE10
+	background-repeat: repeat-x;
+	//filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+.grad(@dir, @c1, @s1, @c2, @s2){
+	background-color: mix(@c1, @c2, 60%); 
+	background: -moz-linear-gradient(@dir, @c1 @s1, @c2 @s2); // FF 3.6+
+	//background: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+	background: -webkit-linear-gradient(@dir, @c1 @s1, @c2 @s2); // Safari 5.1+, Chrome 10+
+	background: -o-linear-gradient(@dir, @c1 @s1, @c2 @s2); // Opera 11.10
+	background: linear-gradient(@dir, @c1 @s1, @c2 @s2); // TODO Standard, IE10
+	background-repeat: repeat-x;
+	//filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+
+.radGrad(@x, @y, @w, @h, @c1, @s1, @c2, @s2) {
+	background: -moz-radial-gradient(@x @y, @w @h, @c1 @s1, @c2 @s2); // FF 3.6+
+	background: -webkit-radial-gradient(@x @y, @w @h, @c1 @s1, @c2 @s2); // Safari 5.1+, Chrome 10+
+	background: -o-radial-gradient(@x @y, @w @h, @c1 @s1, @c2 @s2); // Opera 11.10
+	background: radial-gradient(@x @y, @w @h, @c1 @s1, @c2 @s2); // Standard, IE10
+}
+
+//Repeating gradient
+.repeating(@color, @lh:1){
+	@unit: (@row * @lh);
+	@stop: 100% - 100% / @unit;
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		from(@color),
+		color-stop(.95, @color),
+		color-stop(.95, @bgc),
+		to(@bgc)
+	);
+	background: -moz-linear-gradient(top, @bgc, @bgc @stop, @color @stop,  @color);
+	background: repeating-linear-gradient(to bottom right, red, red 5px, white 5px, white 10px);
+	background-size: auto @unit;
+}
+
+
+
+// Reset filters for IE
+.reset-filter() {
+	filter: e(%("progid:DXImageTransform.Microsoft.gradient(enabled = false)"));
+}
+
+
+//Special funcs
+//Overflows with gradient
+.puff(@color, @intensity:5%){
+	.grad(lighten(@color, (@intensity/2)), darken(@color, (@intensity/2)));
+}
+
+.gloss(@color, @intensity:5%){
+	//TODO
+}
+
+.reflex(@color, @intensity:5%, @size:20%){
+	//TODO
+}
+
+.mix(@grad, @grad){
+	//TODO: mix two gradients;
+}

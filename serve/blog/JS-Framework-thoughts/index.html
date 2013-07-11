@@ -1,0 +1,63 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<title>JS Framework thoughts</title>
+
+<!--<link rel="stylesheet" href="/css/style.css">-->
+<link rel="stylesheet/less" type="text/css" href="/less/style.less" />
+<script src="/less/ui-kit/less.js" type="text/javascript"></script>
+
+<header>
+	<h1><a href="/">Dmitry Ivanov</a></h1>
+	<p>Frontender</p>
+	<nav>		
+		<ul class="contacts-list">
+			<li><a href="https://github.com/dfcreative">GitHub</a></li>
+			<li><a href="https://vk.com/id80775">vk</a></li>
+			<li><a href="callto:dfcreative">Skype</a></li>
+			<li><a href="mailto:df.creative@gmail.com">Mail</a></li>
+		</ul>
+	</nav>
+</header>
+
+<section>
+<h1 id="js-framework-points">JS Framework points</h1>
+<p>Current state of framework (jquery ui) isn’t satisfying for app development needs: it’s too slow and intricate, requires labor.</p>
+
+<h2 id="main-difficulties">Main difficulties</h2>
+
+<ul>
+  <li>You add event handler (whole string with function binding), add action to this handler, in action add call to API, API changes model, besides, model events are important too, then change of model calls render or somehow reacts on DOM view.</li>
+  <li>Binding of data-reactions is stupid and difficult (data-attributes?) </li>
+  <li>No threads</li>
+</ul>
+
+<p>It’s too long proccess, requires a lot of movements and code to make simple things.</p>
+
+<h2 id="possible-improvements">Possible improvements</h2>
+
+<ul>
+  <li>
+    <p>Event dispatching. You just add event-map, like so: 
+<code>
+"selector" : "method with meta params like dfd call"
+</code></p>
+  </li>
+  <li>
+    <p>Always need to have template for data. There should be possibility to make easy templating like so:
+<code>
+&lt;% include("other_tpl", data) %&gt;
+</code>
+Django-like templating looks nice.</p>
+  </li>
+  <li></li>
+</ul>
+
+
+</section>
+
+<footer>
+</footer>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/site.js"></script>
