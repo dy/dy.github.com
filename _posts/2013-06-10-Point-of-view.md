@@ -1,14 +1,11 @@
 ---
 layout: post
-title: "Point of view"
-tagline: "It’s not static thing worths to be bound"
 description: ""
 category: Life
 tags: [life, thoughts, relations]
 sharing: true
 comments: true
 robots: index,follow
-alias: []
 published: true
 ---
 

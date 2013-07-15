@@ -8,8 +8,6 @@ tags: [inspiration, worldvision, life]
 sharing: true
 comments: true
 robots: index,follow
-alias: [/inspiration/1]
-date: 22 January 2013
 published: true
 ---
 

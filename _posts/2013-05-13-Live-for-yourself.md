@@ -8,8 +8,6 @@ tags: [life, soul, spirit]
 sharing: true
 comments: true
 robots: index,follow
-alias: [/lessons/2012/1/20/jekyll-introduction/index.html]
-date: 22 January 2013
 published: true
 ---
 Lebedev [said](http://tema.livejournal.com/1401690.html) right: you have to live for yourself. I’ve made enough decisions in my life that I don’t want to. More such decisions I made — more I become uninteresting, insipid man with no friends, interests and a lot of addictions.

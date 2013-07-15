@@ -1,15 +1,14 @@
 ---
-layout: default
+layout: list
 ---
-<!--<ul class="posts">
-  {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>-->
 
 
 <h1>Ready projects</h1>
 
-<ul>
-	<li><a href="http://dfcreative.github.io/projects/waterfall/">jQuery.waterfall</a></li>
-	<li>dataURI PNG-generators: <a href="http://dfcreative.github.io/projects/data-uri-painter/underlines.html">underlines</a>, <a href="http://dfcreative.github.io/projects/data-uri-painter/font-based.html">text-based</a>, <a href="http://dfcreative.github.io/projects/data-uri-painter/raw-png-based.html">raw png</a></li>
+<article><a href="http://dfcreative.github.io/projects/waterfall/">jQuery.waterfall</a></article>
+<article>dataURI PNG-generators: <a href="http://dfcreative.github.io/projects/data-uri-painter/underlines.html">underlines</a>, <a href="http://dfcreative.github.io/projects/data-uri-painter/font-based.html">text-based</a>, <a href="http://dfcreative.github.io/projects/data-uri-painter/raw-png-based.html">raw png</a></article>
+
+<h1>Blog</h1>
+{% for post in site.posts %}
+	<article>{{ post.date | date_to_string }}</span> — <a href="{{ post.url }}">{{ post.title }}</a></article>
+{% endfor %}

@@ -1,3 +1,8 @@
+* Merge UI-Kit
+
+* Make post side buttons next and prev
+	* Make them responsible: on mobiles it falls down to flip.
+
 * Make contribution area
 
 * Make clean design with blog, projects

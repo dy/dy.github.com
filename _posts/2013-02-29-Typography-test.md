@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Typography test"
-tagline: "Why jekyll is awesome"
 description: "Test of all known typographic elements"
 category: Test
 tags: [test, typography, demo, styles]
@@ -9,7 +8,6 @@ sharing: true
 comments: false
 robots: index,follow
 alias: [/typotest]
-date: 22 January 2013
 published: true
 ---
 

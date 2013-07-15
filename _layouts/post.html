@@ -1,4 +1,48 @@
 ---
 layout: default
 ---
-{{content}}
+
+<nav class="page-nav">
+	<ul>
+		<li id="prev-post" class="prev">
+			<a href="{{ page.previous.url }}" title="{{ page.previous.date|date:'%B %y' }} — {{ page.previous.title }}" class="popupper-balloon" data-content="#prev-posts">‹</a>
+		</li>
+		<li id="next-post" class="next">
+			<a href="{{ page.next.url }}" title="{{ page.next.date|date:'%B %y' }} — {{ page.next.title }}" class="popupper-balloon" data-content="#next-posts">›</a>
+		</li>
+	</ul>
+	{% assign post = page.next %}
+	<ul id="next-posts" hidden>
+		{% for i in (1..5) %}
+			{% if post %}
+				<li class=""><a href="{{ post.url }}">{{ post.title }}</a></li>
+				{% assign post = post.next %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+
+	{% assign post = page.previous %}
+	<ul id="prev-posts" hidden>
+		{% for i in (1..5) %}
+			{% if post %}
+				<li class=""><a href="{{ post.url }}">{{ post.title }}</a></li>
+				{% assign post = post.previous %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+</nav>
+
+<section>	
+	<nav class="breadcrumbs">
+		<ul>
+			<li><a href="/">dmitry ivanov</a></li>
+			<li><a href="/blog">posts</a></li>
+		</ul>
+	</nav>
+	<header>
+		<h1>{{ page.title }}</h1>
+		<p class="tagline">{{ page.tagline }}</p>
+		<time datetime="{{ page.date }}">{{ page.date|date:'%B %y' }}</time>
+	</header>
+	{{ content }}
+</section>
