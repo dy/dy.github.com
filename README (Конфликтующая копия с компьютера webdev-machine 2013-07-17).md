@@ -16,10 +16,8 @@
 		* tooltips
 
 * Blog platform
-	* Easily write posts
-	* Videos,
-	* Audio ideas
-	* Sketches
+	* Easily write posts, videos, sketches, audio ideas
+	* Receive discussion and 
 
 * About, contacts, contribute
 
@@ -27,22 +25,23 @@
 
 ## Notes
 
-* In order to soft be well-sold, it should posess[обладать] features listed:
+* In order to soft be well-sold, it should meet the features listed:
 	* Easy to use, as moment.js
-		* Minimum external libs and deps needed
-	* Multienvironmental
+	* Minimum external libs and deps needed
+		* css for visuals
+		* js
+		* zepto
+	* Multienvironmental & multiplatform
 		* grunt
-		* travis
 		* npm - node
 		* component
 		* jquery
-		* jquery-ui
-		* bower
 		* zepto
 		* require-js
 		* vanilla
 		* photoshop
 		* node-webkit
+		* retina
 	* Fast, as ST3, Chrome
 		* Make performance tests
 	* Minimal size possible
@@ -62,7 +61,7 @@
 	* Use well-known design patterns
 		* jquery plugin boilerplate
 	* Well-tested cross-browserly
-	* Well-known
+	* Popular
 		* jquery plugins repo
 		* github start
 		* unheap
@@ -70,7 +69,4 @@
 		* npm repo
 		* 2nd order repos.
 
-	* If I see small useful library, [удоветворяющую] these criterias, in a neat, defect-free and clean sitem I’ll definitely use it and pay 5$ for it,
-
-## Contribution
-Flattr.com, pledgie.com
+	* If I see small useful library meet these criterias, on a neat, defect-free and clean site, I’ll definitely use it and pay 5$ for it.
