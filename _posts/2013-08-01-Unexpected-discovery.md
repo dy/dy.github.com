@@ -28,3 +28,8 @@ That reminds me of situation with Luda, where I thought the same about her. I’
 At least, she said truth. I saw, he can easily lie to someone, making tales with horroble coldness, like zomboed, but indeed she knew exactly all the truth. She felt my passion to the Annita, but haven’t said the word. Now, she make that bad thing with me. Fucking double game, fucking subterranean river from time to time fountaning to the surface.
 
 Life is hard.
+
+---
+
+So, that explains her unwilling to work. She said, with her externity, she could get a very serious man with money and willing to get wife and get children. But she’s chosen simple man with no much money, at the beginning of his career.
+That is a model of parasytical thoughts: fully dependent creature, trying to find a good sponsor for her externity. She could work upon herself, but she feel more comfortable not having that troubles. She knows that she can always find a good sponsor in face of her husband.
