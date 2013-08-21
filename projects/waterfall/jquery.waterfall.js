@@ -1,10 +1,16 @@
-/*
+﻿/*
 Simple min-height-masonry layout plugin.
 Like masonry column shift, but works.
 */
 ;(function ($){
+	var $wnd = $(window),
+		$doc = $(window.document),
+		$body = $(window.document.body),
+		cssPrefix = detectCSSPrefix();
+
 	var Waterfall = function (el, opts){
-		this.element = $(el);
+		this.$el = $(el);
+		this.el = el[0];
 		this._create(opts)
 	}
 
@@ -12,179 +18,428 @@ Like masonry column shift, but works.
 
 	$.extend(Waterfall.prototype, {
 		options: {
-			itemSelector: null,
-			colMinWidth: 300,
-			defaultContainerWidth: $(window).width(),
-			colClass: null,
-			autoresize: true
+			colMinWidth: 300, //width of column, used to calculate number of columns possible to display
+			defaultContainerWidth: window.clientWidth,
+			autoresize: true,
+			maxCols: 16, //used to restrict max number of columns
+			updateDelay: 25, //how often to reflow layout on window resize
+			useCalc: undefined, //set width through -prefix-calc value. Values: true, false, undefined. Autodetection.
+			useTranslate3d: undefined, //place items through translate3d instead of top/left. Values: true, false, undefined. Autodetection
+			animateShow: false, //whether to animate appending items (causes browser extra-reflows, slows down rendering)
+
+			//callbacks
+			reflow: null
 		},
 
 		_create: function (opts) {
 			var self = this,
 			o = self.options = $.extend({}, self.options, opts);
 
-			self.container = self.element;
+			this.items = [];
 
-			var colClass = o.colClass ? o.colClass : 'wf-column';
-			if (self.container.children().hasClass(colClass)) {
-				//Columns init
-				self.items = $('.' + colClass, self.container).children();
-			} else {
-				//Items init
-				self.items = o.itemSelector ? $(o.itemSelector, self.container) : self.container.children();
+			//init some vars
+			self.lastHeights = [];
+			self.lastItems = [];
+			self.colPriority = []; //most left = most minimal column
+			self.baseOrder = [];
+
+			var cStyle = getComputedStyle(self.el);
+			self.el.style.minHeight = cStyle.height; //prevent scrollbar width changing
+			if (self.$el.css("position") === "static" ) self.el.style.position = "relative";
+
+			//detect placing mode needed
+			if (o.useCalc === undefined){
+				this.calcPrefix = (function(){
+					//modernizr-snippet
+					var dummy = document.createElement('div');
+					var props = ['calc', '-webkit-calc', '-moz-calc', '-o-calc'];
+					for (var i=0; i<props.length; ++i) {
+						var prop = props[i];
+						dummy.style.cssText = 'width:' + prop + '(1px);';
+						if (dummy.style.length)
+							return prop;
+					}
+				})();
+				o.useCalc = !!this.calcPrefix;
 			}
-			
-			self._resetColumns();
-			o.colMinWidth = opts.colMinWidth || parseInt(self.items.css("min-width")) || o.colMinWidth;
+			if (o.useTranslate3d === undefined){
+				o.useTranslate3d = !!detectCSSPrefix("transform")
+			}
 
-			self.reflow();
+			//populate items
+			var items;
+			if (o.itemSelector){
+				items = self.$el.find(o.itemSelector);
+				items.detach();
+				self.$el.children().remove();
+				self.$el.append(items)
+			} else {
+				items = self.$el.children();
+			} 
+						
+			items.each(function(i, e){
+				//self.items[i].data("id", i);
+				self.items.push(e);
+				self._initItem(e);
+			})
+
+			self.lastItem = self.items[self.items.length-1]
+			self.firstItem = self.items[0]
+
+			self._update();
 
 			if (o.autoresize) {
 				$(window).resize(self.reflow.bind(self))
 			}
+		
+			this._observeMutations();
 		},
 
+		_observeMutations: function(){
+			//Make Node changing observer - the fastest way to add items
+			if (window.MutationObserver) {
+				//FF, chrome
+				this.observer = new MutationObserver(function(mutations){
+					var mNum = mutations.length;
+					for (var i = 0; i < mNum; i++){
+						if (mutations[i].removedNodes.length){
+							this._removedItems(Array.prototype.slice.apply(mutations[i].removedNodes))
+						}
+						if (mutations[i].addedNodes.length){
+							this._addedItems(Array.prototype.slice.apply(mutations[i].addedNodes))
+						}
+					}
+				}.bind(this));
 
+				this.observer.observe(this.el, { 
+					attributes: false, 
+					childList: true, 
+					characterData: false 
+				});
+			} else {
+				//opera, ie
+				this.$el.on("DOMNodeInserted", function(e){
+					var el = (e.originalEvent || e).target;
+
+					if (el.nodeType !== 1) return;
+
+					this._addedItems([el])
+				}.bind(this))
+			}
+		},
 
 		//==========================API
-		//getset options
-		getOption: function (name) {
-			return this.options && this.options[name];
-		},
-		getOptions: function () {
-			return this.options;
-		},
-		setOption: function (name, value) {
-			if (this.options) {this.options[name] = value;}
-			this._resetColumns().reflow();
-			return this;
-		},
-		setOptions: function (opts) {
-			this.options = $.extend(this.options, opts);
-			this._resetColumns().reflow()
-			return this;
-		},
-
 		//Ensures column number correct, reallocates items
 		reflow: function () {
-			var self = this, o = self.options,
-				neededCols = self._countNeededColumns();
+			var self = this, o = self.options;
 
-			if (neededCols == self.container.children().length) return; //prevent recounting if columns enough
-
-			self.items.detach();
-			self._ensureColumns(neededCols)._refill();
+			window.clearTimeout(self._updateInterval);
+			self._updateInterval = window.setTimeout(self._update.bind(self), o.updateDelay);
 
 			return self;
 		},
-
-		//Inserts new item(s)
-		add: function (itemSet) {
-			var self = this, o = self.options, cols = self.container.children();
-
-			itemSet = $(itemSet);
-
-			itemSet.each(function (i, el) {
-				var $item = $(el);
-				self._getMinCol(cols).append($item);
-			})
-
-			self.items = self.items.add(itemSet);
-			return self;
-		},
-
 
 		//========================= Techs
-
-		//calc needed number of columns
-		_countNeededColumns: function () {
-			var self = this, o = self.options;
-			return ~~((self.container.width() || o.defaultContainerWidth) / o.colMinWidth) || 1;
-		},
-
-		//Just ensures that columns has correct classes etc
-		_resetColumns: function(){
-			var self = this;
-			self.items.detach();
-			self.container.children().remove();
-			return self;
-		},
-
-		//ensures only number of columns exist
-		_ensureColumns: function (num) {
-			var self = this, o = self.options
-				num = num || 1,
-				columns = self.container.children();
-
-			if (columns.length < num) {
-				var str = '';
-				for (var i = 0; i < num - columns.length; i++ ){
-					str += self._columnTpl();
-				}
-				self.container.append(str);
-			} else if ( columns.length > num) {
-				columns.slice(- columns.length + num).remove();
+		//called by mutation observer
+		_addedItems: function(items){
+			var o = this.options, l = items.length;
+			for (var i = 0; i < l; i++ ){
+				var el = items[i];
+				if (el.nodeType !== 1) continue;
+				this.items.push(el);
+				this._initItem(el); //TODO: optimize
 			}
 
-			columns = self.container.children();
-			columns.css({
-				"width": 100 / columns.length +"%",
-				"display": "inline-block",
-				"vertical-align": "top"
-			})
-			return self;
+			for (var i = 0; i < l; i++){
+				this._placeItem(items[i])
+			}
+
+			this.lastItem = this.items[this.items.length - 1];
+
+			this._maximizeHeight();
 		},
 
-		_columnTpl: function () {
-			return '<div class="wf-column ' + (this.options.colClass || '')  + '"></div>';
+		//called by mutation observer
+		_removedItems: function(items){
+			var l = items.length,
+				childItems = this.el.childNodes,
+				cl = childItems.length;
+			
+			//reinit items
+			this.items.length = 0;
+			for (var i = 0; i < cl; i++){
+				if (childItems[i] !== 1 ) continue;
+				this.items.push(childItems[i]);
+			}			
+			this.lastItem = this.items[this.items.length - 1];
+
+			this._update();
 		},
 
-		//Redistributes items by columns
-		_refill: function () {
+		//simple trigger routine
+		_trigger: function(cbName, arg){
+			try {
+				if (this.options[cbName]) this.options[cbName].call(this.$el, arg);
+				this.$el.trigger(cbName, [arg])
+			} catch (err){
+				throw (err);
+			}
+		},
+
+		//init item properties once item appended
+		_initItem: function(el){
+			var o = this.options;
+			//parse span
+			var	span = el.getAttribute("data-span") || 1;
+			span = (span === "all" ? o.maxCols : Math.max(0,Math.min( ~~(span), o.maxCols)));
+			el.span = span; //quite bad, but no choice: dataset is sloow
+
+			//save heavy style-attrs
+			var style = getComputedStyle(el);
+			el.mr = ~~(style.marginRight.slice(0, -2))
+			el.ml = ~~(style.marginLeft.slice(0, -2))
+			el.bt = ~~(style.borderTopWidth.slice(0, -2)) 
+			el.bb = ~~(style.borderBottomWidth.slice(0, -2))
+			el.mt = ~~(style.marginTop.slice(0, -2)) //ignored because of offsetTop instead of style.top
+			el.mb = ~~(style.marginBottom.slice(0, -2)); 
+
+			//set style
+			el.style.position = "absolute";
+			this._setItemWidth(el);
+
+			//parset float
+			var float = el.getAttribute("data-float") || el.getAttribute("data-column");
+			switch (float){
+				case null: //no float
+					el.floatCol = null;
+					break;
+				case "right":
+				case "last":
+					el.floatCol = -span;
+					break;
+				case "left":
+				case "first":
+					el.floatCol = 0;
+					break;
+				default: //int column
+					el.floatCol = ~~(float) - 1;
+					break;
+			}
+
+			if (o.animateShow) {
+				if (o.useTranslate3d){
+					//TODO: this below crashes chrome
+					//el.style[cssPrefix+"translate"] = "translate3d(0, " + this.lastHeights[this.colPriority[0]] + "px ,0)"
+				} else {
+					el.style.top = this.lastHeights[this.colPriority[this.colPriority.length-1]] + "px";
+					el.style.left = this.colWidth * this.colPriority[this.colPriority.length-1] + "px";							
+				}
+				el.removeAttribute("hidden");
+			}
+		},
+
+		_initLayoutParams: function(){
+			var self = this, o = self.options,
+				cStyle = window.getComputedStyle(self.el),
+				i = 0,
+				prevCols = self.lastItems.length;
+
+			self.pl = ~~(cStyle.paddingLeft.slice(0,-2));
+			self.pt = ~~(cStyle.paddingTop.slice(0, -2));
+			self.pr = ~~(cStyle.paddingRight.slice(0, -2));
+			self.pb = ~~(cStyle.paddingBottom.slice(0, -2));
+
+			self.lastHeights.length = 0;
+			self.colPriority.length = 0; //most left = most minimal column
+			self.baseOrder.length = 0;
+
+			self.colWidth = self.el.clientWidth - self.pl - self.pr;
+
+			self.lastItems.length = ~~(self.colWidth / o.colMinWidth) || 1; //needed length
+
+			var top = o.useTranslate3d?0:self.pt;
+			for (i = 0; i < self.lastItems.length; i++){
+				self.lastHeights.push(top);
+				self.baseOrder.push(i);
+				self.colPriority.push(i);
+			}
+
+			self.colWidth /= self.lastItems.length;
+
+			//console.log(prevCols + "->" + self.lastItems.length);
+			if (!o.useCalc || prevCols !== self.lastItems.length) {
+				//set item widths carefully - if columns changed or px widths used
+				for (var i = self.items.length; i--;){
+					this._setItemWidth(self.items[i]);
+				}
+			}
+
+			return self.lastItems.length;
+		},
+
+		//full update of layout
+		_updateInterval: 0,
+		_update: function(from, to){
+			//window.start = Date.now()
+			var self = this, o = self.options,
+				i = 0,
+				start = from || 0,
+				end = to || self.items.length,
+				colsNeeded = self._initLayoutParams();
+
+			//console.log("beforePlace:" + this.lastItems.length)
+			for (i = start; i < end; i++){
+				self._placeItem(self.items[i]);
+			}
+			//console.log("afterPlace:" + this.lastItems.length)
+
+			self._maximizeHeight();
+			self._trigger('reflow');
+			//console.log("time elapsed: " + (Date.now() - window.start) + "ms")
+		},
+
+		//set item width based on span/colWidth
+		_setItemWidth: function(el){
+			var span = el.span > this.lastItems.length ? this.lastItems.length : el.span,
+				cols = this.lastItems.length,
+				colWeight = span/cols;
+			if (this.options.useCalc){
+				el.w = (100 * colWeight);
+				el.style.width = this.calcPrefix + "(" + (100 * colWeight) +"% - " + (el.mr + el.ml + (this.pl + this.pr) * colWeight) + "px)";
+			} else {
+				el.w = ~~(this.colWidth * span - (el.ml + el.mr))
+				el.style.width =  el.w + "px";
+			}
+		},
+
+		_placeItem: function(e){
 			var self = this, o = self.options;
 
-			//for each item place it correctly
-			self.items.each(function (i, el) {
-				var $e = $(el),
-					col = $e.data("float") || $e.data("column");
-				if (col){
-					switch(col){
-						case "left":
-						case "first":
-							self.container.children().first().append($e)
-							break;
-						case "right":
-						case "last":
-							self.container.children().last().append($e)
-							break;
-						default:
-							self.container.children().eq(Math.max(Math.min(col, self.container.children().length) - 1, 0)).append($e)
-					}
+			var lastHeights = self.lastHeights,
+				lastItems = self.lastItems,
+				colPriority = self.colPriority,
+				minCol = 0, minH = 0,
+				h = 0, c = 0, t = 0, end = 0, start = 0,
+				span = e.span > lastItems.length ? lastItems.length : e.span,
+				newH = 0,
+				spanCols = [], //numbers of spanned columns
+				spanHeights = [], //heights of spanned columns
+				style,
+				floatCol = e.floatCol;
+
+			//console.log("------ item")
+			//console.log("span:"+span)			
+
+			//Find proper column to place item
+			//console.log(colPriority)
+			if (floatCol){
+				floatCol = floatCol > 0 ? Math.min(floatCol, lastItems.length - span) : (lastItems.length + floatCol);
+			}
+			if (span === 1){
+				//Single-span element
+				if (floatCol === null){
+					//no align
+					minCol = colPriority.shift();
 				} else {
-					self._getMinCol(self.container.children()).append($e);
+					//predefined column to align
+					minCol = floatCol;
+					for (c = 0; c < colPriority.length; c++){
+						if (colPriority[c] == minCol){
+							colPriority.splice(c, 1);
+							break;
+						}
+					}
 				}
-			})
+				spanCols.push(minCol);
+				minH = lastHeights[minCol];
+			} else if (span >= lastItems.length){//Full-span element
+				minCol = 0;
+				minH = lastHeights[colPriority[colPriority.length - 1]];
+				spanCols = self.baseOrder.slice();
+				spanCols.length = lastHeights.length;
+				colPriority.length = 0;
+			} else {//Some-span element
+				if (floatCol !== null){
+					minCol = floatCol;
+					minH = Math.max.apply(Math, lastHeights.slice(minCol, minCol + span));
+					//console.log(lastHeights.slice(minCol, span))
+					//console.log("fCol:" + floatCol + " minH: " + minH)
+				} else {
+					//Make span heights alternatives
+					spanHeights.length = 0;
+					minH = Infinity; minCol = 0;
+					for (c = 0; c <= lastItems.length - span; c++){
+						spanHeights[c] = Math.max.apply(Math, lastHeights.slice(c, c+span))
+						if (spanHeights[c] < minH){
+							minCol = c;
+							minH = spanHeights[c];
+						}
+					}
+				}
+				//Replace priorities
+				for (c = 0; c < colPriority.length; ){
+					if (colPriority[c] >= minCol && colPriority[c] < minCol + span){
+						spanCols.push(colPriority.splice(c, 1)[0])
+					} else {c++}
+				}
+			}
 
-			return self;
+			//console.log(spanCols)
+			//console.log(lastHeights)
+			//console.log("↑ spanCols to ↓")
+
+			//TODO: correct to work ok with options
+			e.top = ~~minH; //stupid save value for translate3d
+			if (o.useTranslate3d) {
+				var offset = (100 * minCol/span) + "% + " + ~~((e.ml + e.mr) * minCol/span) + "px";
+				e.style[cssPrefix + "transform"] = "translate3d(" + this.calcPrefix + "(" + offset + "), " + e.top + "px, 0)";
+				//e.style[cssPrefix + "transform"] = "translate3d(" + ~~(self.colWidth * minCol + self.pl) + "px, " + e.top + "px, 0)";			
+			} else {
+				e.style.top = e.top + "px";
+				e.style.left = self.colWidth * minCol + self.pl + "px";
+			}
+
+			//if element was added first time and is out of flow - show it
+			//e.style.opacity = 1;
+			e.removeAttribute("hidden")
+
+			newH = self._getBottom(e); //this is the most difficult operation (e.clientHeight)
+			for (t = 0; t < spanCols.length; t++) {
+				lastItems[spanCols[t]] = e;
+				self.lastHeights[spanCols[t]] = newH;
+			}
+
+			//console.log(lastItems)
+			//console.log("↑ self.lastHeights to ↓")
+			//console.log(self.lastHeights)
+			//console.log("minCol:"+minCol+" minH:"+minH+" newH:"+newH)
+			//console.log(colPriority)
+			//console.log("↑ colPriorities to ↓")
+
+			//Update colPriority
+			for (c = colPriority.length; c--;){
+				h = self.lastHeights[colPriority[c]];
+				if (newH >= h){
+					Array.prototype.splice.apply(colPriority, [c+1,0].concat(spanCols));
+					break;
+				}
+			}
+			if (colPriority.length < lastHeights.length){
+				Array.prototype.unshift.apply(colPriority, spanCols)
+				//self.colPriority = spanCols.concat(colPriority)
+			}
 		},
 
-		//returns column with minimal height
-		_getMinCol: function (cols) {
-			var minH = Infinity, minCol = cols.first(), minColNum = 0;
-
-			//fill min heights
-			cols.each(function (colNum, col){
-				var $col = $(col);
-
-				var h = $col.height();
-				if (h < minH) {
-					minH = h;
-					minColNum = colNum;
-				}
-			});
-
-			return cols.eq(minColNum);
+		_getBottom: function(e) {
+			if (!e) return 0//this.pt;
+			//TODO: memrize height, look for height change to avoid reflow
+			return e.top + e.clientHeight + e.bt + e.bb + e.mb + e.mt;
 		},
+
+		_maximizeHeight: function(){
+			var top = this.options.useTranslate3d ? this.pt : 0;
+			this.el.style.minHeight = this.lastHeights[this.colPriority[this.colPriority.length - 1]] + this.pb + top + "px";
+		}
 		
 	})
 
@@ -195,10 +450,14 @@ Like masonry column shift, but works.
 				$(el).data("waterfall")[arg](arg2);
 			})
 		} else {
-			return $(this).each(function (i, el) {
-				var wf = new Waterfall(el, arg);
-				if (!$(el).data("waterfall")) $(el).data("waterfall", wf);
-			})			
+			var $this = $(this),
+			opts = $.extend({},$.parseDataAttributes(this[0]),arg);
+			if (opts.width && !opts.colMinWidth) {
+				opts.colMinWidth = opts.width
+			}
+			var wf = new Waterfall($this, opts);
+			if (!$this.data("waterfall")) $this.data("waterfall", wf);
+			return wf;
 		}
 	}
 
@@ -213,7 +472,7 @@ Like masonry column shift, but works.
 				[].forEach.call(el.attributes, function(attr) {
 					if (/^data-/.test(attr.name)) {
 						var camelCaseName = attr.name.substr(5).replace(/-(.)/g, function ($0, $1) {
-						    return $1.toUpperCase();
+							return $1.toUpperCase();
 						});
 						data[camelCaseName] = attr.value;
 					}
@@ -223,18 +482,29 @@ Like masonry column shift, but works.
 		}
 	}
 
+	//prefix/features detector
+	function detectCSSPrefix(property){
+		if (!property) property = "transform";
 
+		var style = document.defaultView.getComputedStyle(document.body, "");
+		if (style[property]) return "";
+		if (style["-webkit-" + property]) return "-webkit-";
+		if (style["-moz-" + property]) return "-moz-";
+		if (style["-o-" + property]) return "-o-";
+		if (style["-khtml-" + property]) return "-khtml-";
+
+		return false;
+	}
+
+	//autostart
 	$(function () {
 		var defClass = window.waterfall && window.waterfall.defaultClass || Waterfall.defaultClass;
 
 		$("." + defClass).each(function (i, e){
-				var $e = $(e),
-					opts = $.extend(window.waterfall || {}, $.parseDataAttributes(e));
-					if (opts.width && !opts.colMinWidth) {
-						opts.colMinWidth = opts.width
-					}
-				$e.waterfall(opts);
-			});
-		})
+			var $e = $(e),
+				opts = window.waterfall || {};
+			$e.waterfall(opts);
+		});
+	})
 
 })(window.jQuery || window.Zepto);
