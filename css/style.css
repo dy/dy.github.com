@@ -1,3 +1,137 @@
+body{
+	
+}
+body:after{
+	content: "";
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	background: #ffffff; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 23%, hsla(205,32%,87%,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(23%,hsla(0,0%,100%,1)), color-stop(100%,hsla(205,32%,87%,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 23%,hsla(205,32%,87%,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 23%,hsla(205,32%,87%,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 23%,hsla(205,32%,87%,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  hsla(0,0%,100%,1) 23%,hsla(205,32%,87%,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6edf2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+a{
+	color: #343434;
+}
+a:hover{
+	color: rgb(10, 120, 172);
+}
+
+/* Aside */
+	aside{
+		display: block;
+		width: 200px;
+	}
+	@media all and (max-width: 640px) {
+		aside{
+			padding: 0 20%;
+			margin: 0px auto 40px;
+		}
+	}
+	@media all and (min-width: 640px) {
+		aside{
+			position: absolute;
+			left: -240px;
+			top: 80px;
+		}
+	}
+
+	.brand-name{
+		font-weight: bolder;
+		font-size: 24px;
+		color: #343434;
+		text-decoration: none;
+		display: block;
+		margin-bottom: 10px; 
+	}
+
+	.main-menu{
+		padding: 0 0px;
+		text-align: center;
+	}
+	.sub-menu{
+		margin-top: 40px;
+		text-align: center;
+	}
+	.nav-item{
+		display: block;
+		text-align: center;
+		margin: 0 0 10px 0;
+		border-radius: 40px;
+		line-height: 40px;
+		color: #343434;
+		font-weight: bolder;
+		text-shadow: 0 1px 0 white;
+	}
+	.nav-item.active{
+		background: linear-gradient(to bottom, rgb(63, 120, 151) 2%, rgb(184, 229, 235) 100%);
+		box-shadow: inset 0 1px 12px 1px rgba(4, 68, 110, 0.82), 0 2px 0 white;
+		color: white;
+		text-shadow: 0 1px 5px rgba(13, 69, 105, 0.64);
+	}
+
+	.icon-link > svg{
+		max-width: 36px;
+		max-height: 36px;
+		fill: #232328;
+	}
+	.icon-link:hover > svg{
+		fill: rgb(10, 120, 172);
+	}
+
+/* Main */
+	section{
+		margin: 40px auto 0;
+		position: relative;
+		width: 90%;
+	}
+	@media all and (max-width: 640px) {
+		section{
+			left: 0;
+		}
+	}
+	@media all and (min-width: 640px) {
+		section{
+			width: 60%;
+			max-width: 960px;
+			left: 80px;
+		}
+	}
+
+/* Blogroll */
+	article{
+		margin-bottom: 40px;
+	}
+	article time{
+		opacity: 0;
+		font-size: 13px;
+		float: right;
+		color: #aab;
+		transition: .3s linear opacity;
+	}
+	article:hover time{
+		opacity: 1;
+	}
+	hr{
+		display: none;
+	}
+	h3{
+		margin:0;
+	}
+
+
+
+
+/* Single-page helpfull */
 nav > ul {
 	list-style: none;
 	margin: 0;
@@ -7,12 +141,6 @@ nav > ul > li{
 	margin: 0;
 	padding: 0;
 }
-
-section{
-	margin: auto;
-	width: 60%;
-}
-
 .prev-post, .next-post{
 	font-size: 80px;
 	position: absolute;

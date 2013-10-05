@@ -69,8 +69,11 @@
 		* component repo
 		* npm repo
 		* 2nd order repos.
+	* Built in a reliable way, by the standards and best-practices. Very solid.
 
-	* If I see small useful library, [удоветворяющую] these criterias, in a neat, defect-free and clean sitem I’ll definitely use it and pay 5$ for it,
+	* If I see small useful library which meet these criterias, in a neat, defect-free and clean sitem I’ll definitely use it and pay 5$ for it,
+
+* Always *keep any project*, any work *in working state*. Any commit should grant that project will start and do something. Do not start global refactoring. Go by way of minimal-possible working states. Make before simplier than difficult. It’s efficacious.
 
 ## Contribution
 Flattr.com, pledgie.com
