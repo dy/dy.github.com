@@ -1,5 +1,8 @@
 body{
-	
+	color: #343434;
+	font-family: Cambria, "Liberation Serif", Georgia, serif;	
+	font-size: 16px;
+	line-height: 1.4;
 }
 body:after{
 	content: "";
@@ -10,12 +13,12 @@ body:after{
 	left: 0;
 	z-index: -1;
 	background: #ffffff; /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 23%, hsla(205,32%,87%,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(23%,hsla(0,0%,100%,1)), color-stop(100%,hsla(205,32%,87%,1))); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 23%,hsla(205,32%,87%,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 23%,hsla(205,32%,87%,1) 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 23%,hsla(205,32%,87%,1) 100%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  hsla(0,0%,100%,1) 23%,hsla(205,32%,87%,1) 100%); /* W3C */
+	background: -moz-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 53%, hsla(205,32%,87%,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(53%,hsla(0,0%,100%,1)), color-stop(100%,hsla(205,32%,87%,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 53%,hsla(205,32%,87%,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 53%,hsla(205,32%,87%,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  hsla(0,0%,100%,1) 53%,hsla(205,32%,87%,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  hsla(0,0%,100%,1) 53%,hsla(205,32%,87%,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6edf2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
@@ -23,13 +26,15 @@ a{
 	color: #343434;
 }
 a:hover{
-	color: rgb(10, 120, 172);
+	color: rgb(218, 41, 17);
 }
 
 /* Aside */
 	aside{
 		display: block;
+		font-family: Helvetica, Tahoma, "Nimbus Sans", Arial, sans-serif ;
 		width: 200px;
+
 	}
 	@media all and (max-width: 640px) {
 		aside{
@@ -47,25 +52,25 @@ a:hover{
 
 	.brand-name{
 		font-weight: bolder;
-		font-size: 24px;
 		color: #343434;
-		text-decoration: none;
 		display: block;
-		margin-bottom: 10px; 
+		margin: 0 auto 10px;
+		text-decoration: none;
+		text-align: center;
 	}
 
 	.main-menu{
-		padding: 0 0px;
+		padding: 0 20px;
 		text-align: center;
 	}
 	.sub-menu{
-		margin-top: 40px;
+		margin-top: 30px;
 		text-align: center;
 	}
 	.nav-item{
 		display: block;
 		text-align: center;
-		margin: 0 0 10px 0;
+		margin: 0 0 0px 0;
 		border-radius: 40px;
 		line-height: 40px;
 		color: #343434;
@@ -73,19 +78,23 @@ a:hover{
 		text-shadow: 0 1px 0 white;
 	}
 	.nav-item.active{
-		background: linear-gradient(to bottom, rgb(63, 120, 151) 2%, rgb(184, 229, 235) 100%);
+		background: linear-gradient(to bottom, rgb(36, 124, 164) 2%, rgb(183, 237, 241) 100%);
 		box-shadow: inset 0 1px 12px 1px rgba(4, 68, 110, 0.82), 0 2px 0 white;
 		color: white;
-		text-shadow: 0 1px 5px rgba(13, 69, 105, 0.64);
+		text-shadow: 0 1px 5px rgba(13, 69, 105, 1);
+		text-decoration: none;
 	}
 
+	.icon-link{
+		margin: 0 2px;
+	}
 	.icon-link > svg{
 		max-width: 36px;
 		max-height: 36px;
 		fill: #232328;
 	}
 	.icon-link:hover > svg{
-		fill: rgb(10, 120, 172);
+		fill: rgb(218, 41, 17);
 	}
 
 /* Main */
@@ -106,28 +115,71 @@ a:hover{
 			left: 80px;
 		}
 	}
+	@media all and (min-width: 800px) {
+		section{
+			width: 50%;
+		}
+	}
 
 /* Blogroll */
 	article{
-		margin-bottom: 40px;
+		margin-bottom: 60px;
 	}
-	article time{
+	article time, article .tags{
 		opacity: 0;
-		font-size: 13px;
+		font-size: 14px;
 		float: right;
-		color: #aab;
+		color: #bbc;
+		font-family: Helvetica, Tahoma, "Nimbus Sans", Arial, sans-serif ;
 		transition: .3s linear opacity;
 	}
-	article:hover time{
+	article .tags{
+		float: left;
+	}
+	.tag:not(:last-child):after{
+		content:", ";
+	}
+	article:hover time, article:hover .tags{
 		opacity: 1;
 	}
 	hr{
-		display: none;
+		border:none;
+		background: none;
+		margin:0;
+		position: relative;
+		height: 1px;
+		line-height: 10px;
+		margin-bottom: 10px;
+	}
+	hr:after{
+		content:"- - -";
+		color: #bbc;
+		position: absolute;
+		top: -5px;
+		left: 0;
 	}
 	h3{
 		margin:0;
 	}
+	p{
+	}
+	h1, h2, h3, h4, h5, h6{
+		font-family: Helvetica, Tahoma, "Nimbus Sans", Arial, sans-serif ;
+	}
 
+
+.pagination{
+	text-align: center;
+	padding: 10px 0;
+	font-size: 18px;
+	font-style: italic;
+}
+.next, .previous{
+	margin: 0 10px;
+}
+span.next, span.previous{
+	display: none
+}
 
 
 
