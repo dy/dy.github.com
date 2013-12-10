@@ -34,7 +34,6 @@ a:hover{
 		display: block;
 		font-family: Helvetica, Tahoma, "Nimbus Sans", Arial, sans-serif ;
 		width: 200px;
-
 	}
 	@media all and (max-width: 640px) {
 		aside{
@@ -44,9 +43,9 @@ a:hover{
 	}
 	@media all and (min-width: 640px) {
 		aside{
-			position: absolute;
-			left: -240px;
-			top: 80px;
+			position: fixed;
+			left: 20px;
+			top: 40px;
 		}
 	}
 
@@ -57,11 +56,14 @@ a:hover{
 		margin: 0 auto 10px;
 		text-decoration: none;
 		text-align: center;
+		font-size: 18px;
+		letter-spacing: 0px;
 	}
 
 	.main-menu{
 		padding: 0 20px;
 		text-align: center;
+		font-family: serif;
 	}
 	.sub-menu{
 		margin-top: 30px;
@@ -73,13 +75,14 @@ a:hover{
 		margin: 0 0 0px 0;
 		border-radius: 40px;
 		line-height: 40px;
-		color: #343434;
-		font-weight: bolder;
+		color:rgb(78, 92, 82);
+		font-weight: normal;
+		font-size: 16px;
 		text-shadow: 0 1px 0 white;
 	}
 	.nav-item.active{
-		background: linear-gradient(to bottom, rgb(36, 124, 164) 2%, rgb(183, 237, 241) 100%);
-		box-shadow: inset 0 1px 12px 1px rgba(4, 68, 110, 0.82), 0 2px 0 white;
+		background: linear-gradient(to bottom, rgb(76, 65, 111) 2%, rgb(179, 224, 223) 100%);
+		box-shadow: inset 0 2px 1px 1px rgba(67, 0, 187, 0.12), 0 2px 0 rgb(255, 255, 255);
 		color: white;
 		text-shadow: 0 1px 5px rgba(13, 69, 105, 1);
 		text-decoration: none;
@@ -95,6 +98,22 @@ a:hover{
 	}
 	.icon-link:hover > svg{
 		fill: rgb(218, 41, 17);
+	}
+
+	.menu-counter{
+		color: rgb(255, 255, 255);
+		background: rgb(75, 59, 85);
+		padding: 0 5px;
+		height: 14px;
+		line-height: 14px;
+		text-align: center;
+		border-radius: 14px;
+		font-family: sans-serif;
+		font-size: 8px;
+		left: 2px;
+		top: -2px;
+		position: relative;
+		display: none;
 	}
 
 /* Main */
@@ -122,24 +141,28 @@ a:hover{
 	}
 
 /* Blogroll */
-	article{
+	.post{
 		margin-bottom: 60px;
 	}
-	article time, article .tags{
+	.post-time, .post-tags{
 		opacity: 0;
 		font-size: 14px;
 		float: right;
-		color: #bbc;
-		font-family: Helvetica, Tahoma, "Nimbus Sans", Arial, sans-serif ;
 		transition: .3s linear opacity;
 	}
-	article .tags{
+	.post-tag, .post-time{		
+		color:#bbc;
+		font-size: 10px;
+		letter-spacing: 2px;
+		font-family: Helvetica, Tahoma, "Nimbus Sans", Arial, sans-serif ;
+	}
+	.post-tags{
 		float: left;
 	}
-	.tag:not(:last-child):after{
+	.post-tag:not(:last-child):after{
 		content:", ";
 	}
-	article:hover time, article:hover .tags{
+	.post:hover .post-time, .post:hover .post-tags{
 		opacity: 1;
 	}
 	hr{
@@ -158,13 +181,15 @@ a:hover{
 		top: -5px;
 		left: 0;
 	}
-	h3{
-		margin:0;
-	}
-	p{
-	}
 	h1, h2, h3, h4, h5, h6{
 		font-family: Helvetica, Tahoma, "Nimbus Sans", Arial, sans-serif ;
+		margin: 0;
+	}
+	p, ul, ol{
+		margin: 10px 0 0;
+	}
+	.post-content{
+		margin-bottom: 10px;
 	}
 
 
@@ -200,6 +225,10 @@ nav > ul > li{
 	width: 10%;
 	top: 100px;
 	text-align: center;
+}
+
+.prev-post a, .next-post a{	
+	text-decoration: none;
 }
 
 .prev-post{
