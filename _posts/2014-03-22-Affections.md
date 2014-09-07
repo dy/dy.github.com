@@ -32,3 +32,7 @@ Emotions - that is what I remember. I remember these disappointments with Stacy 
 ---
 
 I want to build a place where to spend time in a friends circle, comfortably, with no any liabilities.
+
+---
+
+So my main solution to the affection problem is to find a substitute resource of energy. It can be a books, friends, sports, romance, anything.
