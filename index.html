@@ -11,11 +11,19 @@
 		overflow: hidden;
 		margin: 0 auto;
 		background: ghostwhite;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
 		display: flex;
-		flex-flow: row wrap;
+		-webkit-flex-flow: row wrap;
+		    -ms-flex-flow: row wrap;
+		        flex-flow: row wrap;
 	}
 	.▴ {
-		flex: 1 0 90%;
+		-webkit-box-flex: 1;
+		-webkit-flex: 1 0 90%;
+		    -ms-flex: 1 0 90%;
+		        flex: 1 0 90%;
 		font-size: 24rem;
 		line-height: 16rem;
 		text-decoration: none;
@@ -26,7 +34,10 @@
 	.▪ {
 		z-index: 1;
 		position: relative;
-		flex: 1 0 16rem;
+		-webkit-box-flex: 1;
+		-webkit-flex: 1 0 16rem;
+		    -ms-flex: 1 0 16rem;
+		        flex: 1 0 16rem;
 		font-size: 4rem;
 		line-height: 6rem;
 		text-decoration: none;
