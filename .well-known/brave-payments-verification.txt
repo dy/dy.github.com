@@ -1,4 +1,0 @@
-This is a Brave Payments publisher verification file.
-
-Domain: dy.github.io 
-Token: b2a7bd755b1bf4dce7f7b5f300515d809071a6eafba7ccd4a579ab84bc3ca091
